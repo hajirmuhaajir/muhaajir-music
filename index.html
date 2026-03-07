@@ -1,2061 +1,1542 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta http-equiv="X-Frame-Options" content="DENY">
-  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
-  <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline';">
-  <link rel="icon" type="image/png" href="https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png">
-  <link rel="manifest" href="data:application/manifest+json,{
-    &quot;name&quot;: &quot;Muhaajir Music Player&quot;,
-    &quot;short_name&quot;: &quot;Muhaajir&quot;,
-    &quot;start_url&quot;: &quot;.&quot;,
-    &quot;display&quot;: &quot;standalone&quot;,
-    &quot;background_color&quot;: &quot;#050505&quot;,
-    &quot;theme_color&quot;: &quot;#d4af37&quot;,
-    &quot;icons&quot;: [{
-      &quot;src&quot;: &quot;https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png&quot;,
-      &quot;sizes&quot;: &quot;512x512&quot;,
-      &quot;type&quot;: &quot;image/png&quot;
-    }]
-  }">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;450;500&display=swap" rel="stylesheet">
-  <title>Muhaajir Music — LRC Player</title>
-  <style>
-    *, *::before, *::after { 
-      margin: 0; 
-      padding: 0; 
-      box-sizing: border-box; 
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#05050f">
+<link rel="icon" href="https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Muhaajir Music</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 
-    :root {
-      /* Deep luxurious dark palette */
-      --bg:          #030303;
-      --surface:     #0a0a0a;
-      --surface2:    #111111;
-      --surface3:    #181818;
-      --glass:       rgba(20, 20, 20, 0.7);
-      --glass-border: rgba(212, 175, 55, 0.15);
-      
-      /* Warm gold tones */
-      --gold:        #d4af37;
-      --gold-light:  #e5c570;
-      --gold-deep:   #b8961f;
-      --gold-dim:    rgba(212, 175, 55, 0.08);
-      --gold-glow:   rgba(212, 175, 55, 0.2);
-      --gold-border: rgba(212, 175, 55, 0.25);
-      
-      /* Text with perfect contrast */
-      --text:        #f0e9dd;
-      --text-mid:    #a8a090;
-      --text-dim:    #5a554a;
-      
-      /* Typography */
-      --font-display: 'Cormorant Garamond', Georgia, serif;
-      --font-body:    'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-mono:    'JetBrains Mono', 'SF Mono', Monaco, monospace;
-      
-      /* Transitions */
-      --ease:        cubic-bezier(0.4, 0, 0.2, 1);
-      --ease-out:    cubic-bezier(0, 0, 0.2, 1);
-      --ease-in:     cubic-bezier(0.4, 0, 1, 1);
-      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-      
-      /* Radii */
-      --radius-sm:   8px;
-      --radius-md:   16px;
-      --radius-lg:   24px;
-      --radius-xl:   32px;
-      --radius-full: 9999px;
-    }
+:root{
+  --bg:#05050f;
+  --s1:#0b0b1e;
+  --s2:#111128;
+  --s3:#181835;
+  --card:#13132a;
+  --lift:#1a1a38;
 
-    /* ===== RESET & BASE ===== */
-    html { 
-      scroll-behavior: smooth; 
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+  --blue:#4e80ee;
+  --blue2:#7aa3f5;
+  --blue3:#a8c4ff;
+  --bd:rgba(78,128,238,.25);
+  --bglow:rgba(78,128,238,.18);
+  --bdim:rgba(78,128,238,.08);
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px 16px 20px;
-      position: relative;
-      overflow-x: hidden;
-      line-height: 1.5;
-    }
+  --t1:#eeeeff;
+  --t2:#9898c8;
+  --t3:#44446a;
 
-    /* Refined ambient background */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: 
-        radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.03) 0%, transparent 40%),
-        radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.03) 0%, transparent 40%),
-        radial-gradient(circle at 40% 80%, rgba(212, 175, 55, 0.02) 0%, transparent 50%),
-        radial-gradient(circle at 70% 20%, rgba(212, 175, 55, 0.02) 0%, transparent 50%);
-      pointer-events: none;
-      z-index: 0;
-    }
+  --ff:'Fraunces',Georgia,serif;
+  --fb:'DM Sans',sans-serif;
+  --fm:'JetBrains Mono',monospace;
 
-    /* Ultra-subtle grain */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.3;
-      mix-blend-mode: overlay;
-    }
+  --ease:cubic-bezier(.4,0,.2,1);
+  --spring:cubic-bezier(.34,1.56,.64,1);
 
-    /* ===== LOGIN SCREEN ===== */
-    .login-screen {
-      position: fixed;
-      inset: 0;
-      background: var(--bg);
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 1s var(--ease-out), visibility 1s;
-      backdrop-filter: blur(20px);
-    }
-    .login-screen.hidden { 
-      opacity: 0; 
-      visibility: hidden; 
-      pointer-events: none; 
-    }
+  /* Safe area */
+  --sat:env(safe-area-inset-top,0px);
+  --sab:env(safe-area-inset-bottom,0px);
+}
 
-    .login-logo {
-      width: 88px;
-      filter: brightness(0) invert(1) drop-shadow(0 0 30px rgba(212, 175, 55, 0.4));
-      margin-bottom: 48px;
-      animation: loginBreath 4s ease-in-out infinite;
-    }
-    @keyframes loginBreath {
-      0%, 100% { 
-        opacity: 0.7; 
-        filter: brightness(0) invert(1) drop-shadow(0 0 20px rgba(212, 175, 55, 0.2));
-        transform: scale(1);
-      }
-      50% { 
-        opacity: 1; 
-        filter: brightness(0) invert(1) drop-shadow(0 0 40px rgba(212, 175, 55, 0.6));
-        transform: scale(1.02);
-      }
-    }
+html{height:100%;overflow:hidden}
 
-    .login-ring {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      border: 1.5px solid rgba(212, 175, 55, 0.15);
-      border-top-color: var(--gold);
-      border-right-color: var(--gold-light);
-      animation: spin 1.4s cubic-bezier(0.76, 0, 0.24, 1) infinite;
-      margin-bottom: 32px;
-    }
-    @keyframes spin { 
-      to { transform: rotate(360deg); } 
-    }
+body{
+  font-family:var(--fb);
+  background:var(--bg);
+  color:var(--t1);
+  height:100%;
+  overflow:hidden;
+  position:relative;
+  -webkit-font-smoothing:antialiased;
+}
 
-    .login-hint {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.3em;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      font-weight: 400;
-    }
+/* ═══ AMBIENT BACKGROUND ═══ */
+#ambientBg{
+  position:fixed;inset:0;z-index:0;
+  background:radial-gradient(ellipse 80% 60% at 50% -10%, var(--bglow) 0%, transparent 70%);
+  transition:background 2.5s var(--ease);
+  pointer-events:none;
+}
+#ambientBg::after{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(
+    135deg,
+    rgba(78,128,238,.015) 0px,
+    rgba(78,128,238,.015) 1px,
+    transparent 1px,
+    transparent 12px
+  );
+}
 
-    /* ===== APP CONTAINER ===== */
-    .app-wrap {
-      position: relative;
-      z-index: 2;
-      width: min(1360px, 100%);
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
+/* ═══ LOADER ═══ */
+#loader{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--bg);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:24px;
+  transition:opacity .8s var(--ease),visibility .8s;
+}
+#loader.out{opacity:0;visibility:hidden;pointer-events:none}
+.ld-logo{
+  width:60px;height:60px;
+  border-radius:18px;
+  background:var(--s3);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 40px var(--bglow);
+  animation:ldp 2.5s ease-in-out infinite;
+}
+.ld-logo img{width:32px;filter:brightness(0) invert(1)}
+@keyframes ldp{
+  0%,100%{box-shadow:0 0 20px var(--bglow);transform:scale(.97)}
+  50%{box-shadow:0 0 50px rgba(78,128,238,.5);transform:scale(1.03)}
+}
+.ld-ring{
+  width:32px;height:32px;border-radius:50%;
+  border:2px solid var(--s3);
+  border-top-color:var(--blue);border-right-color:var(--blue2);
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ld-txt{font-family:var(--fm);font-size:.58rem;letter-spacing:.28em;color:var(--t3);text-transform:uppercase}
 
-    /* ===== TOP BAR ===== */
-    .top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 4px 16px;
-    }
-    .top-bar-brand {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .top-bar-brand img {
-      height: 28px;
-      filter: brightness(0) invert(0.95);
-      opacity: 0.9;
-    }
-    .top-bar-label {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      color: var(--text-mid);
-      text-transform: uppercase;
-      border-left: 1px solid var(--text-dim);
-      padding-left: 16px;
-      font-weight: 400;
-    }
-    .top-bar-right {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-    .top-bar-year {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      color: var(--text-dim);
-      font-weight: 400;
-    }
+/* ═══ VIEWS ═══ */
+.view{
+  position:fixed;inset:0;
+  overflow:hidden;
+  transition:opacity .35s var(--ease),transform .35s var(--ease);
+}
+.view.hidden{opacity:0;pointer-events:none;transform:translateX(100%)}
+.view.back-hidden{opacity:0;pointer-events:none;transform:translateX(-30%)}
 
-    /* Sleep timer badge */
-    .sleep-badge {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      color: var(--gold);
-      background: var(--gold-dim);
-      border: 1px solid var(--gold-border);
-      padding: 6px 12px;
-      border-radius: 40px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.2s var(--ease);
-      display: none;
-      backdrop-filter: blur(8px);
-      font-weight: 500;
-    }
-    .sleep-badge.visible { display: block; }
-    .sleep-badge:hover { 
-      background: rgba(212, 175, 55, 0.15);
-      border-color: var(--gold);
-    }
+/* ═══ VIEW: NOW PLAYING ═══ */
+#vPlayer{
+  display:flex;flex-direction:column;
+  padding-top:calc(var(--sat) + 14px);
+}
 
-    /* ===== MAIN CARD ===== */
-    .main-card {
-      display: grid;
-      grid-template-columns: 1fr;
-      background: var(--surface);
-      border: 1px solid rgba(212, 175, 55, 0.08);
-      border-radius: var(--radius-xl);
-      overflow: hidden;
-      box-shadow: 
-        0 25px 50px -12px rgba(0, 0, 0, 0.8),
-        0 0 0 1px rgba(212, 175, 55, 0.05) inset,
-        0 0 30px rgba(0, 0, 0, 0.5);
-      transition: box-shadow 0.3s var(--ease);
-    }
-    .main-card:hover {
-      box-shadow: 
-        0 30px 60px -12px rgba(0, 0, 0, 0.9),
-        0 0 0 1px rgba(212, 175, 55, 0.1) inset;
-    }
+/* Status bar area */
+.status-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 22px 0;
+  height:44px;flex-shrink:0;
+}
+.sr-pill{
+  font-family:var(--fm);font-size:.52rem;
+  letter-spacing:.18em;color:var(--blue);
+  background:var(--bdim);border:1px solid var(--bd);
+  padding:5px 12px;border-radius:20px;text-transform:uppercase;
+  display:flex;align-items:center;gap:6px;
+}
+.sr-dot{width:5px;height:5px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.sr-logo{height:20px;filter:brightness(0) invert(.85);opacity:.7}
+.sr-menu{
+  width:36px;height:36px;border:none;background:none;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+}
+.sr-menu span{display:block;width:18px;height:1.5px;background:var(--t2);border-radius:2px;transition:all .2s}
 
-    /* ===== PLAYER SIDE ===== */
-    .player-side {
-      padding: 40px 36px 36px;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-      position: relative;
-      overflow: hidden;
-    }
+/* Art section */
+.art-section{
+  flex-shrink:0;
+  padding:18px 28px 0;
+  position:relative;
+}
+.art-outer{
+  width:100%;aspect-ratio:1/1;
+  border-radius:28px;
+  position:relative;
+  filter:drop-shadow(0 28px 50px rgba(0,0,0,.7));
+  transition:transform .4s var(--spring),filter .4s var(--ease);
+}
+.art-outer.playing{
+  filter:drop-shadow(0 28px 60px rgba(0,0,0,.75)) drop-shadow(0 0 40px var(--bglow));
+}
+.art-outer.playing{transform:scale(1.02)}
+.art-inner{
+  width:100%;height:100%;
+  border-radius:28px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.07);
+  position:relative;
+}
+#artCv{width:100%;height:100%;display:block;border-radius:28px}
 
-    /* Elegant corner accent */
-    .player-side::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 200px;
-      height: 200px;
-      background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.06), transparent 70%);
-      pointer-events: none;
-      border-radius: 0 0 0 200px;
-    }
+/* Vinyl overlay when playing */
+.art-inner::after{
+  content:'';position:absolute;inset:0;
+  border-radius:28px;
+  background:conic-gradient(
+    from 0deg,
+    transparent 0%, rgba(78,128,238,.03) 25%,
+    transparent 50%, rgba(78,128,238,.03) 75%, transparent 100%
+  );
+  animation:spin 8s linear infinite;
+  opacity:0;transition:opacity .5s;
+}
+.art-outer.playing .art-inner::after{opacity:1}
 
-    /* Bitrate badge - subtle luxury */
-    .bitrate-badge {
-      position: absolute;
-      top: 24px;
-      right: 24px;
-      font-family: var(--font-mono);
-      font-size: 0.55rem;
-      letter-spacing: 0.15em;
-      color: var(--gold);
-      border: 1px solid rgba(212, 175, 55, 0.2);
-      padding: 6px 12px;
-      border-radius: 40px;
-      background: rgba(10, 10, 10, 0.6);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      text-transform: uppercase;
-      font-weight: 500;
-      z-index: 5;
-    }
-    .bitrate-dot {
-      width: 6px;
-      height: 6px;
-      background: var(--gold);
-      border-radius: 50%;
-      animation: pulse 2.5s ease-in-out infinite;
-    }
-    @keyframes pulse { 
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.8); }
-    }
+/* Track info */
+.info-section{
+  padding:22px 28px 0;
+  flex-shrink:0;
+}
+.info-top{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  margin-bottom:4px;
+}
+.info-title{
+  font-family:var(--ff);
+  font-size:clamp(1.55rem,6.5vw,2.2rem);
+  font-weight:400;
+  line-height:1.1;
+  color:var(--t1);
+  letter-spacing:-.01em;
+  flex:1;padding-right:16px;
+  word-break:break-word;
+}
+.info-fav{
+  width:38px;height:38px;border:none;background:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  transition:transform .2s var(--spring);margin-top:2px;
+}
+.info-fav:active{transform:scale(.8)}
+.info-fav svg{width:22px;height:22px;stroke:var(--t3);fill:none;stroke-width:2;transition:all .2s}
+.info-fav.on svg{stroke:var(--blue2);fill:var(--blue2)}
+.info-album{
+  font-family:var(--fm);font-size:.6rem;
+  letter-spacing:.14em;color:var(--t3);
+  text-transform:uppercase;margin-top:6px;
+}
 
-    /* Now playing label */
-    .now-playing-label {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.3em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 500;
-    }
-    .now-playing-dot {
-      width: 6px;
-      height: 6px;
-      background: var(--gold);
-      border-radius: 50%;
-      animation: blink 2.2s ease-in-out infinite;
-    }
-    .now-playing-dot.paused { 
-      animation: none; 
-      opacity: 0.3; 
-    }
-    @keyframes blink { 
-      0%, 100% { opacity: 1; } 
-      50% { opacity: 0.3; } 
-    }
+/* Progress */
+.prog-section{
+  padding:20px 28px 0;
+  flex-shrink:0;
+}
+.prog-track{
+  width:100%;height:3px;
+  background:rgba(255,255,255,.07);
+  border-radius:4px;cursor:pointer;
+  position:relative;
+  margin-bottom:10px;
+  transition:height .2s;
+}
+.prog-track::before{content:'';position:absolute;top:-14px;bottom:-14px;left:0;right:0}
+#pFill{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--blue),var(--blue2),var(--blue3));
+  border-radius:4px;
+  transition:width .1s linear;
+  position:relative;
+}
+#pFill::after{
+  content:'';position:absolute;right:-8px;top:50%;
+  transform:translateY(-50%) scale(0);
+  width:16px;height:16px;background:#fff;
+  border-radius:50%;box-shadow:0 0 12px var(--blue);
+  transition:transform .25s var(--spring);opacity:0;
+}
+.prog-track:active #pFill::after,
+.prog-track.dragging #pFill::after{
+  transform:translateY(-50%) scale(1);opacity:1;
+}
+.time-row{
+  display:flex;justify-content:space-between;
+  font-family:var(--fm);font-size:.57rem;
+  color:var(--t3);letter-spacing:.06em;
+}
 
-    .song-meta {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      color: var(--text-mid);
-      text-transform: uppercase;
-      margin-bottom: 8px;
-      font-weight: 400;
-    }
+/* Controls */
+.ctrl-section{
+  padding:18px 20px 0;
+  flex-shrink:0;
+}
+.ctrl-row1{
+  display:flex;align-items:center;
+  justify-content:space-between;
+  margin-bottom:0;
+}
+.cb{
+  background:none;border:none;cursor:pointer;
+  width:52px;height:52px;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--t2);
+  transition:all .15s var(--ease);
+  position:relative;
+}
+.cb svg{
+  width:22px;height:22px;
+  stroke:currentColor;fill:none;
+  stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+  transition:all .15s;
+}
+.cb:active{transform:scale(.85);background:var(--bdim)}
+.cb.on{color:var(--blue)}
+.cb.on::after{
+  content:'';position:absolute;bottom:6px;left:50%;
+  transform:translateX(-50%);
+  width:4px;height:4px;background:var(--blue);border-radius:50%;
+}
 
-    /* Gradient title - refined */
-    .song-title-large {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 5vw, 3.8rem);
-      font-weight: 400;
-      line-height: 1.05;
-      letter-spacing: -0.01em;
-      margin-bottom: 12px;
-      word-break: break-word;
-      background: linear-gradient(135deg, var(--text) 0%, var(--gold-light) 40%, var(--gold) 60%, var(--text) 100%);
-      background-size: 250% 250%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: shimmer 10s ease infinite;
-    }
-    @keyframes shimmer {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+/* Big play button */
+.play-big{
+  width:70px;height:70px;border-radius:50%;
+  background:linear-gradient(135deg,#fff 0%,#e8f0ff 100%);
+  border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 12px 32px rgba(0,0,0,.5),0 0 0 0 rgba(255,255,255,.1);
+  transition:all .25s var(--spring);
+  flex-shrink:0;
+}
+.play-big:active{transform:scale(.9);box-shadow:0 6px 18px rgba(0,0,0,.6)}
+.play-big svg{width:26px;height:26px;fill:var(--bg);stroke:none}
 
-    .song-badges {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 28px;
-      flex-wrap: wrap;
-    }
-    .badge {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      color: var(--text-mid);
-      border: 1px solid var(--text-dim);
-      padding: 5px 12px;
-      border-radius: 40px;
-      text-transform: uppercase;
-      background: rgba(255, 255, 255, 0.02);
-      backdrop-filter: blur(4px);
-      transition: all 0.2s var(--ease);
-    }
-    .badge.gold {
-      color: var(--gold);
-      border-color: var(--gold-border);
-      background: var(--gold-dim);
-    }
+/* Volume row */
+.vol-section{
+  padding:16px 28px 0;
+  flex-shrink:0;
+}
+.vol-row{display:flex;align-items:center;gap:12px}
+.vol-ico{flex-shrink:0}
+.vol-ico svg{width:16px;height:16px;stroke:var(--t3);fill:none;stroke-width:1.8}
+.vol-sl{
+  flex:1;-webkit-appearance:none;appearance:none;
+  height:3px;background:rgba(255,255,255,.08);
+  border-radius:3px;outline:none;cursor:pointer;
+}
+.vol-sl::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:16px;height:16px;
+  background:#fff;border-radius:50%;cursor:pointer;
+  box-shadow:0 2px 8px rgba(0,0,0,.4);
+  transition:transform .15s var(--spring);
+}
+.vol-sl:active::-webkit-slider-thumb{transform:scale(1.3)}
+.vol-sl::-moz-range-thumb{width:16px;height:16px;background:#fff;border:none;border-radius:50%;cursor:pointer}
+.vol-pct{font-family:var(--fm);font-size:.55rem;color:var(--t3);min-width:30px;text-align:right}
 
-    .playback-status {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      margin-bottom: 24px;
-      transition: color 0.3s var(--ease);
-      font-weight: 400;
-    }
-    .playback-status.playing { 
-      color: var(--gold); 
-    }
+/* Action row */
+.action-section{
+  padding:16px 28px 0;
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.act-btn{
+  border:none;background:none;cursor:pointer;
+  width:44px;height:44px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:14px;
+  color:var(--t3);
+  transition:all .15s;
+  position:relative;
+}
+.act-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.act-btn:active{transform:scale(.85);background:var(--bdim)}
+.act-btn.has-timer{color:var(--blue)}
+.act-btn.has-timer::after{
+  content:'';position:absolute;top:8px;right:8px;
+  width:5px;height:5px;background:var(--blue);border-radius:50%;
+}
 
-    /* ===== VISUALIZER - organic ===== */
-    .visualizer {
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      gap: 4px;
-      height: 48px;
-      margin-bottom: 28px;
-      opacity: 0;
-      transition: opacity 0.6s var(--ease);
-    }
-    .visualizer.active { opacity: 1; }
-    .v-bar {
-      width: 4px;
-      background: linear-gradient(to top, var(--gold-deep), var(--gold-light));
-      border-radius: 4px;
-      height: 6px;
-      box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
-    }
-    .visualizer.active .v-bar {
-      animation-iteration-count: infinite;
-      animation-direction: alternate;
-      animation-timing-function: ease-in-out;
-    }
-    .v-bar:nth-child(1) { animation: bar1 0.7s 0.0s infinite; }
-    .v-bar:nth-child(2) { animation: bar2 0.9s 0.1s infinite; }
-    .v-bar:nth-child(3) { animation: bar1 0.6s 0.0s infinite; }
-    .v-bar:nth-child(4) { animation: bar3 0.8s 0.2s infinite; }
-    .v-bar:nth-child(5) { animation: bar2 1.0s 0.0s infinite; }
-    .v-bar:nth-child(6) { animation: bar3 0.7s 0.3s infinite; }
-    .v-bar:nth-child(7) { animation: bar1 0.8s 0.1s infinite; }
-    .v-bar:nth-child(8) { animation: bar2 0.9s 0.0s infinite; }
-    .v-bar:nth-child(9) { animation: bar3 0.6s 0.2s infinite; }
-    .v-bar:nth-child(10) { animation: bar1 0.8s 0.1s infinite; }
-    .v-bar:nth-child(11) { animation: bar2 1.1s 0.3s infinite; }
-    .v-bar:nth-child(12) { animation: bar3 0.7s 0.0s infinite; }
-    @keyframes bar1 { 0% { height: 6px; } 100% { height: 32px; } }
-    @keyframes bar2 { 0% { height: 6px; } 100% { height: 42px; } }
-    @keyframes bar3 { 0% { height: 6px; } 100% { height: 24px; } }
+/* Bottom nav */
+.bottom-nav{
+  position:absolute;bottom:0;left:0;right:0;
+  background:rgba(5,5,15,.85);
+  backdrop-filter:blur(24px) saturate(1.6);
+  -webkit-backdrop-filter:blur(24px) saturate(1.6);
+  border-top:1px solid rgba(255,255,255,.06);
+  display:flex;align-items:center;justify-content:space-around;
+  padding-bottom:calc(var(--sab) + 8px);
+  padding-top:12px;
+  flex-shrink:0;
+  z-index:10;
+}
+.nav-btn{
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  background:none;border:none;cursor:pointer;
+  padding:4px 16px;
+  transition:all .2s;
+}
+.nav-btn svg{width:22px;height:22px;stroke:var(--t3);fill:none;stroke-width:1.8;transition:all .2s}
+.nav-btn span{font-family:var(--fm);font-size:.45rem;letter-spacing:.1em;color:var(--t3);text-transform:uppercase;transition:all .2s}
+.nav-btn.on svg{stroke:var(--blue)}
+.nav-btn.on span{color:var(--blue)}
+.nav-btn:active{transform:scale(.9)}
 
-    /* ===== LYRICS ===== */
-    .lyrics-wrap {
-      position: relative;
-      margin-bottom: 32px;
-    }
-    .lyrics-wrap::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: linear-gradient(to bottom, transparent, var(--gold) 20%, var(--gold) 80%, transparent);
-      border-radius: 2px;
-      opacity: 0.6;
-    }
+/* ═══ VIEW: LYRICS ═══ */
+#vLyrics{
+  background:var(--bg);
+  display:flex;flex-direction:column;
+  padding-top:calc(var(--sat) + 14px);
+}
+.lyr-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 22px 0;height:52px;flex-shrink:0;
+}
+.lyr-head-left{display:flex;align-items:center;gap:12px}
+.back-btn{
+  width:38px;height:38px;border:none;background:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--t2);transition:all .15s;
+}
+.back-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.lyr-head-title{
+  font-family:var(--fm);font-size:.58rem;
+  letter-spacing:.2em;color:var(--t2);text-transform:uppercase;font-weight:500;
+}
+.lyr-viz{display:flex;align-items:flex-end;gap:3px;height:16px;opacity:0;transition:opacity .4s}
+.lyr-viz.on{opacity:1}
+.lv{width:3px;background:linear-gradient(to top,var(--blue),var(--blue2));border-radius:3px}
+.lyr-viz.on .lv{animation:lva .6s ease-in-out infinite alternate}
+.lv:nth-child(1){animation-duration:.55s}
+.lv:nth-child(2){animation-duration:.72s;animation-delay:.1s}
+.lv:nth-child(3){animation-duration:.48s;animation-delay:.05s}
+.lv:nth-child(4){animation-duration:.82s;animation-delay:.18s}
+@keyframes lva{0%{height:3px}100%{height:14px}}
 
-    .lyrics-display {
-      background: transparent;
-      padding: 20px 20px 20px 28px;
-      font-size: 0.95rem;
-      line-height: 1.9;
-      color: var(--text-mid);
-      min-height: 180px;
-      max-height: 240px;
-      overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: var(--gold-dim) transparent;
-      scroll-behavior: smooth;
-      font-family: var(--font-display);
-      font-weight: 300;
-      font-style: italic;
-      text-align: center;
-      mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
-      -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
-    }
-    .lyrics-display::-webkit-scrollbar { width: 3px; }
-    .lyrics-display::-webkit-scrollbar-thumb { 
-      background: var(--gold-dim); 
-      border-radius: 3px;
-    }
-    .lyrics-display::-webkit-scrollbar-track { background: transparent; }
+.lyr-song-info{
+  padding:8px 22px 20px;
+  flex-shrink:0;
+}
+.lyr-song-title{
+  font-family:var(--ff);font-size:1.3rem;
+  font-weight:400;color:var(--t1);
+}
+.lyr-song-album{
+  font-family:var(--fm);font-size:.52rem;
+  letter-spacing:.14em;color:var(--t3);text-transform:uppercase;margin-top:4px;
+}
 
-    .lyric-line {
-      display: block;
-      color: rgba(240, 233, 221, 0.25);
-      line-height: 1.9;
-      margin-bottom: 4px;
-      font-size: 0.95rem;
-      text-align: center;
-      transition: all 0.4s var(--ease);
-      transform-origin: center;
-      letter-spacing: 0.01em;
-    }
-    .lyric-line.active-lyric {
-      color: var(--text);
-      font-weight: 400;
-      font-style: italic;
-      text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
-      transform: scale(1.02);
-    }
+.lyr-body{
+  flex:1;overflow-y:auto;overflow-x:hidden;
+  padding:20px 28px 120px;
+  scrollbar-width:none;
+  scroll-behavior:smooth;
+}
+.lyr-body::-webkit-scrollbar{display:none}
 
-    /* ===== PROGRESS ===== */
-    .progress-section { margin-bottom: 28px; }
-    .progress-track {
-      width: 100%;
-      height: 2px;
-      background: rgba(255, 255, 255, 0.06);
-      cursor: pointer;
-      position: relative;
-      margin-bottom: 10px;
-      transition: height 0.2s var(--ease);
-      border-radius: 4px;
-    }
-    .progress-track:hover { height: 4px; }
-    .progress-track::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: -10px;
-      bottom: -10px;
-      right: 0;
-    }
-    #progress-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--gold), var(--gold-light));
-      position: relative;
-      transition: width 0.1s linear;
-      border-radius: 4px;
-    }
-    #progress-fill::after {
-      content: '';
-      position: absolute;
-      right: -6px;
-      top: 50%;
-      transform: translateY(-50%) scale(0);
-      width: 14px;
-      height: 14px;
-      background: var(--gold-light);
-      border-radius: 50%;
-      box-shadow: 0 0 15px var(--gold);
-      opacity: 0;
-      transition: opacity 0.2s, transform 0.25s var(--ease-spring);
-    }
-    .progress-track:hover #progress-fill::after {
-      opacity: 1;
-      transform: translateY(-50%) scale(1);
-    }
-    .time-row {
-      display: flex;
-      justify-content: space-between;
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      color: var(--text-dim);
-      font-weight: 400;
-    }
+.lyr-line{
+  display:block;
+  font-family:var(--ff);
+  font-size:clamp(1.35rem,5.5vw,1.7rem);
+  font-weight:400;
+  line-height:1.4;
+  margin-bottom:22px;
+  color:rgba(238,238,255,.08);
+  transition:color .5s var(--ease),transform .4s var(--ease),text-shadow .5s var(--ease);
+  letter-spacing:-.01em;
+  font-style:italic;
+}
+.lyr-line.near{color:rgba(238,238,255,.2);transform:scale(.99)}
+.lyr-line.cur{
+  color:var(--t1);
+  font-style:italic;
+  text-shadow:0 0 40px rgba(78,128,238,.4);
+  transform:scale(1.01);
+}
+.lyr-line.empty{
+  font-family:var(--fm);
+  font-size:.65rem;font-style:normal;
+  letter-spacing:.15em;color:var(--t3);
+  text-transform:uppercase;margin-bottom:0;
+  display:flex;flex-direction:column;align-items:center;
+  gap:16px;padding-top:40px;text-align:center;
+}
+.lyr-empty-icon{width:40px;height:40px;stroke:var(--t3);fill:none;stroke-width:1.5;opacity:.5}
 
-    /* ===== CONTROLS PANEL ===== */
-    .controls-panel {
-      border: 1px solid rgba(212, 175, 55, 0.1);
-      border-radius: var(--radius-lg);
-      padding: 24px 28px;
-      background: rgba(20, 20, 20, 0.4);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow: 
-        inset 0 1px 1px rgba(255, 255, 255, 0.03),
-        inset 0 -1px 1px rgba(0, 0, 0, 0.3),
-        0 20px 40px -20px rgba(0, 0, 0, 0.8);
-      transition: all 0.3s var(--ease);
-    }
-    .controls-panel:hover {
-      border-color: rgba(212, 175, 55, 0.2);
-      background: rgba(25, 25, 25, 0.5);
-    }
+/* Lyr mini player at bottom */
+.lyr-mini{
+  position:absolute;bottom:0;left:0;right:0;
+  background:rgba(5,5,15,.9);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-top:1px solid rgba(255,255,255,.06);
+  padding:12px 22px calc(var(--sab) + 12px);
+  flex-shrink:0;
+}
+.lyr-mini-top{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:12px;
+}
+.lyr-mini-art{
+  width:42px;height:42px;border-radius:10px;
+  overflow:hidden;flex-shrink:0;
+  background:var(--card);
+  border:1px solid rgba(255,255,255,.07);
+}
+#lyrMiniCv{width:100%;height:100%;display:block}
+.lyr-mini-info{flex:1;min-width:0}
+.lyr-mini-title{
+  font-size:.85rem;font-weight:600;color:var(--t1);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.lyr-mini-album{font-family:var(--fm);font-size:.5rem;letter-spacing:.1em;color:var(--t3);margin-top:2px}
+.lyr-mini-btns{display:flex;align-items:center;gap:4px}
+.lmb{
+  width:38px;height:38px;border:none;background:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--t2);border-radius:10px;
+  transition:all .15s;
+}
+.lmb svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.lmb:active{transform:scale(.85);background:var(--bdim)}
+.lmb.play-mini{
+  width:38px;height:38px;
+  background:#fff;border-radius:50%;
+}
+.lmb.play-mini svg{width:14px;height:14px;fill:var(--bg);stroke:none}
 
-    .controls-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
-    }
+.lyr-mini-prog{
+  width:100%;height:2px;
+  background:rgba(255,255,255,.07);border-radius:2px;cursor:pointer;
+}
+#lyrPFill{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--blue),var(--blue2));
+  border-radius:2px;transition:width .1s linear;
+}
 
-    /* Control buttons - refined */
-    .ctrl-btn {
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      width: 44px;
-      height: 44px;
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s var(--ease);
-      position: relative;
-    }
-    .ctrl-btn svg {
-      width: 20px;
-      height: 20px;
-      fill: none;
-      stroke: var(--text-mid);
-      stroke-width: 1.8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      transition: all 0.2s var(--ease);
-    }
-    .ctrl-btn:hover { 
-      background: var(--gold-dim); 
-    }
-    .ctrl-btn:hover svg { 
-      stroke: var(--gold); 
-      transform: scale(1.05);
-    }
-    .ctrl-btn:active { transform: scale(0.92); }
-    .ctrl-btn.active svg { 
-      stroke: var(--gold); 
-    }
-    .ctrl-btn.active::after {
-      content: '';
-      position: absolute;
-      bottom: 6px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 4px;
-      height: 4px;
-      background: var(--gold);
-      border-radius: 50%;
-    }
+/* ═══ VIEW: PLAYLIST ═══ */
+#vPlaylist{
+  background:var(--bg);
+  display:flex;flex-direction:column;
+  padding-top:calc(var(--sat) + 14px);
+}
+.pl-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 22px 0;height:52px;flex-shrink:0;
+}
+.pl-head-title{
+  font-family:var(--fm);font-size:.58rem;
+  letter-spacing:.2em;color:var(--t2);text-transform:uppercase;font-weight:500;
+}
+.pl-count{
+  font-family:var(--fm);font-size:.52rem;letter-spacing:.1em;
+  color:var(--blue);background:var(--bdim);
+  border:1px solid var(--bd);border-radius:20px;
+  padding:5px 12px;
+}
 
-    /* Play button - elegant */
-    .play-btn {
-      width: 60px;
-      height: 60px;
-      background: var(--text);
-      border: none;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s var(--ease-spring);
-      box-shadow: 
-        0 10px 25px -5px rgba(0, 0, 0, 0.6),
-        0 0 0 0 rgba(212, 175, 55, 0.3);
-      flex-shrink: 0;
-    }
-    .play-btn:hover {
-      background: var(--gold-light);
-      box-shadow: 
-        0 15px 30px -5px rgba(0, 0, 0, 0.7),
-        0 0 0 10px rgba(212, 175, 55, 0.15);
-      transform: scale(1.05);
-    }
-    .play-btn:active { transform: scale(0.96); }
-    .play-btn svg {
-      width: 26px;
-      height: 26px;
-      fill: var(--bg);
-      stroke: none;
-      transition: transform 0.2s var(--ease-spring);
-    }
-    .play-btn.playing svg { 
-      transform: scale(1.1); 
-    }
+.pl-scroll{
+  flex:1;overflow-y:auto;overflow-x:hidden;
+  padding:4px 12px 140px;
+  scrollbar-width:none;
+}
+.pl-scroll::-webkit-scrollbar{display:none}
 
-    .ctrl-spacer { flex: 1; max-width: 12px; }
+.pl-group{
+  font-family:var(--fm);font-size:.5rem;
+  letter-spacing:.2em;color:var(--t3);text-transform:uppercase;
+  padding:20px 12px 8px;
+  border-top:1px solid rgba(255,255,255,.04);margin-top:4px;
+}
+.pl-group:first-child{border-top:none;margin-top:0;padding-top:12px}
 
-    /* Volume row */
-    .vol-row {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.04);
-    }
-    .vol-label {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.15em;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      min-width: 28px;
-      display: flex;
-      align-items: center;
-    }
-    .vol-label svg {
-      width: 16px;
-      height: 16px;
-      fill: none;
-      stroke: var(--text-dim);
-      stroke-width: 1.8;
-    }
-    .vol-slider {
-      flex: 1;
-      -webkit-appearance: none;
-      height: 3px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 3px;
-      outline: none;
-      cursor: pointer;
-      transition: height 0.2s;
-    }
-    .vol-slider:hover { height: 5px; }
-    .vol-slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 14px;
-      height: 14px;
-      background: var(--gold);
-      border-radius: 50%;
-      cursor: pointer;
-      box-shadow: 0 0 15px var(--gold);
-      transition: transform 0.2s var(--ease-spring);
-    }
-    .vol-slider::-webkit-slider-thumb:hover { transform: scale(1.3); }
-    .vol-slider::-moz-range-thumb {
-      width: 14px;
-      height: 14px;
-      background: var(--gold);
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-    .vol-value {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      color: var(--text-dim);
-      min-width: 32px;
-      text-align: right;
-      font-weight: 500;
-    }
+.pl-track{
+  display:flex;align-items:center;gap:14px;
+  padding:13px 14px;border-radius:14px;
+  cursor:pointer;
+  transition:background .15s var(--ease);
+  position:relative;overflow:hidden;
+  margin-bottom:2px;
+}
+.pl-track::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:3px;background:linear-gradient(to bottom,var(--blue),var(--blue2));
+  border-radius:0 3px 3px 0;
+  transform:scaleY(0);transition:transform .2s var(--spring);
+}
+.pl-track:active{background:rgba(78,128,238,.06)}
+.pl-track.on{background:var(--bdim)}
+.pl-track.on::before{transform:scaleY(1)}
 
-    /* Sleep timer */
-    .sleep-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(255, 255, 255, 0.04);
-      margin-top: 18px;
-    }
-    .sleep-label {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      white-space: nowrap;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .sleep-label svg {
-      width: 15px;
-      height: 15px;
-      stroke: var(--text-dim);
-      stroke-width: 1.8;
-    }
-    .sleep-select {
-      flex: 1;
-      background: rgba(30, 30, 30, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 40px;
-      color: var(--text-mid);
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      padding: 8px 16px;
-      outline: none;
-      cursor: pointer;
-      transition: all 0.2s;
-      backdrop-filter: blur(8px);
-    }
-    .sleep-select:focus { 
-      border-color: var(--gold-border); 
-      color: var(--text);
-    }
-    .sleep-select option { 
-      background: var(--surface2); 
-      color: var(--text);
-    }
-    .sleep-start-btn {
-      background: var(--gold-dim);
-      border: 1px solid var(--gold-border);
-      border-radius: 40px;
-      color: var(--gold);
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      padding: 8px 18px;
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
-      font-weight: 500;
-      backdrop-filter: blur(8px);
-    }
-    .sleep-start-btn:hover { 
-      background: rgba(212, 175, 55, 0.2);
-      border-color: var(--gold);
-    }
-    .sleep-cancel-btn {
-      background: transparent;
-      border: 1px solid var(--text-dim);
-      border-radius: 40px;
-      color: var(--text-dim);
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      padding: 8px 18px;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: none;
-      backdrop-filter: blur(8px);
-    }
-    .sleep-cancel-btn:hover {
-      border-color: var(--text-mid);
-      color: var(--text-mid);
-    }
+.pl-num{
+  font-family:var(--fm);font-size:.58rem;
+  color:var(--t3);width:18px;text-align:right;flex-shrink:0;
+  transition:color .15s;
+}
+.pl-track.on .pl-num{color:var(--blue)}
 
-    /* ===== PLAYLIST SIDE ===== */
-    .playlist-side {
-      background: var(--bg);
-      display: flex;
-      flex-direction: column;
-      max-height: 450px;
-      border-left: 1px solid rgba(212, 175, 55, 0.05);
-    }
+.pl-tname{
+  font-size:.88rem;font-weight:400;color:var(--t2);
+  flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  transition:color .15s;
+}
+.pl-track.on .pl-tname{color:var(--t1);font-weight:500}
 
-    .playlist-header {
-      padding: 20px 24px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-shrink: 0;
-      background: rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(8px);
-    }
-    .playlist-title {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      font-weight: 500;
-    }
-    .playlist-count {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      color: var(--gold);
-      background: var(--gold-dim);
-      border: 1px solid var(--gold-border);
-      padding: 5px 12px;
-      border-radius: 40px;
-      font-weight: 500;
-    }
+.pl-wave{
+  display:none;gap:2px;align-items:flex-end;height:12px;flex-shrink:0;
+}
+.pl-track.on .pl-wave{display:flex}
+.pl-wave span{
+  width:2.5px;background:var(--blue2);border-radius:2px;
+  animation:pw .5s ease-in-out infinite alternate;
+}
+.pl-wave span:nth-child(1){height:5px}
+.pl-wave span:nth-child(2){height:10px;animation-delay:.1s;animation-duration:.7s}
+.pl-wave span:nth-child(3){height:6px;animation-delay:.05s;animation-duration:.55s}
+@keyframes pw{0%{transform:scaleY(.25)}100%{transform:scaleY(1)}}
+.pl-track.on.paused .pl-wave span{animation:none;transform:scaleY(.25);opacity:.4}
 
-    .playlist-scroll {
-      flex: 1;
-      overflow-y: auto;
-      padding: 12px;
-      scrollbar-width: thin;
-      scrollbar-color: var(--gold-dim) transparent;
-    }
-    .playlist-scroll::-webkit-scrollbar { width: 4px; }
-    .playlist-scroll::-webkit-scrollbar-thumb { 
-      background: var(--gold-dim); 
-      border-radius: 4px;
-    }
-    .playlist-scroll::-webkit-scrollbar-track { background: transparent; }
+/* Playlist mini player at bottom */
+.pl-mini{
+  position:absolute;bottom:0;left:0;right:0;
+  background:rgba(5,5,15,.9);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-top:1px solid rgba(255,255,255,.06);
+  padding:12px 22px calc(var(--sab) + 12px);
+}
+.pl-mini-inner{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:10px;
+}
+.pl-mini-art{width:42px;height:42px;border-radius:10px;overflow:hidden;flex-shrink:0;background:var(--card);border:1px solid rgba(255,255,255,.07)}
+#plMiniCv{width:100%;height:100%;display:block}
+.pl-mini-info{flex:1;min-width:0}
+.pl-mini-title{font-size:.85rem;font-weight:600;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl-mini-sub{font-family:var(--fm);font-size:.5rem;letter-spacing:.1em;color:var(--t3);margin-top:2px}
+.pl-mini-play{
+  width:38px;height:38px;border-radius:50%;
+  background:#fff;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 16px rgba(0,0,0,.4);
+  transition:all .2s var(--spring);
+}
+.pl-mini-play:active{transform:scale(.88)}
+.pl-mini-play svg{width:14px;height:14px;fill:var(--bg);stroke:none}
+.pl-mini-prog{width:100%;height:2px;background:rgba(255,255,255,.07);border-radius:2px}
+#plPFill{height:100%;width:0%;background:linear-gradient(90deg,var(--blue),var(--blue2));border-radius:2px;transition:width .1s linear}
 
-    .group-label {
-      font-family: var(--font-mono);
-      font-size: 0.55rem;
-      letter-spacing: 0.2em;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      padding: 20px 16px 8px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.02);
-      margin-bottom: 4px;
-      font-weight: 500;
-    }
+/* ═══ VIEW: SETTINGS ═══ */
+#vSettings{
+  background:var(--bg);
+  display:flex;flex-direction:column;
+  padding-top:calc(var(--sat) + 14px);
+}
+.set-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 22px 0;height:52px;flex-shrink:0;
+}
+.set-head-title{
+  font-family:var(--fm);font-size:.58rem;
+  letter-spacing:.2em;color:var(--t2);text-transform:uppercase;font-weight:500;
+}
+.set-body{
+  flex:1;overflow-y:auto;padding:8px 18px calc(var(--sab)+100px);scrollbar-width:none;
+}
+.set-body::-webkit-scrollbar{display:none}
 
-    .track-item {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 12px 16px;
-      border-radius: var(--radius-md);
-      cursor: pointer;
-      transition: all 0.2s var(--ease);
-      position: relative;
-      margin-bottom: 2px;
-    }
-    .track-item::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 8px;
-      bottom: 8px;
-      width: 3px;
-      background: linear-gradient(to bottom, var(--gold), var(--gold-light));
-      border-radius: 3px;
-      transform: scaleY(0);
-      transition: transform 0.2s var(--ease-spring);
-      opacity: 0;
-    }
-    .track-item:hover { 
-      background: rgba(255, 255, 255, 0.02); 
-    }
-    .track-item:hover::before { 
-      transform: scaleY(0.6); 
-      opacity: 0.5;
-    }
-    .track-item.active { 
-      background: var(--gold-dim); 
-    }
-    .track-item.active::before { 
-      transform: scaleY(1); 
-      opacity: 1;
-    }
+.set-section{
+  margin-bottom:8px;
+}
+.set-sec-label{
+  font-family:var(--fm);font-size:.5rem;letter-spacing:.2em;
+  color:var(--t3);text-transform:uppercase;padding:16px 8px 8px;
+}
+.set-card{
+  background:var(--card);border-radius:18px;
+  border:1px solid rgba(255,255,255,.05);
+  overflow:hidden;
+}
+.set-row{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 18px;
+  border-bottom:1px solid rgba(255,255,255,.04);
+  min-height:60px;
+}
+.set-row:last-child{border-bottom:none}
+.set-row-ico{
+  width:38px;height:38px;border-radius:12px;
+  background:var(--bdim);border:1px solid var(--bd);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.set-row-ico svg{width:17px;height:17px;stroke:var(--blue);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.set-row-txt{flex:1;min-width:0}
+.set-row-name{font-size:.88rem;font-weight:500;color:var(--t1)}
+.set-row-sub{font-family:var(--fm);font-size:.52rem;letter-spacing:.06em;color:var(--t3);margin-top:3px}
 
-    .t-num {
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      color: var(--text-dim);
-      width: 24px;
-      text-align: right;
-      flex-shrink: 0;
-      font-weight: 500;
-    }
-    .track-item.active .t-num { 
-      color: var(--gold); 
-    }
+/* Sleep picker inside settings */
+.sleep-inline{
+  display:flex;align-items:center;gap:8px;
+}
+.sleep-sel{
+  flex:1;background:var(--s3);border:1px solid rgba(255,255,255,.07);
+  border-radius:10px;color:var(--t2);
+  font-family:var(--fm);font-size:.58rem;letter-spacing:.06em;
+  padding:8px 12px;outline:none;cursor:pointer;
+  -webkit-appearance:none;appearance:none;
+  transition:border-color .15s;
+}
+.sleep-sel:focus{border-color:var(--bd)}
+.sleep-sel option{background:var(--s2);color:var(--t1)}
+.sleep-go{
+  background:var(--bdim);border:1px solid var(--bd);
+  border-radius:10px;color:var(--blue);
+  font-family:var(--fm);font-size:.55rem;letter-spacing:.08em;
+  padding:8px 14px;cursor:pointer;transition:all .15s;white-space:nowrap;
+}
+.sleep-go:active{background:rgba(78,128,238,.2)}
+.sleep-stop{
+  background:none;border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;color:var(--t3);
+  font-family:var(--fm);font-size:.55rem;letter-spacing:.08em;
+  padding:8px 14px;cursor:pointer;transition:all .15s;
+  display:none;
+}
+.sleep-stop:active{border-color:var(--t2);color:var(--t2)}
+.sleep-cd{
+  font-family:var(--fm);font-size:.58rem;
+  color:var(--blue);display:none;align-items:center;gap:6px;
+  padding:4px 0 0;
+}
+.sleep-cd.on{display:flex}
+.sc-dot{width:5px;height:5px;background:var(--blue);border-radius:50%;animation:pulse 2s infinite}
 
-    .t-name {
-      font-size: 0.85rem;
-      font-weight: 400;
-      flex: 1;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      color: var(--text-mid);
-      transition: color 0.2s;
-      letter-spacing: 0.01em;
-    }
-    .track-item:hover .t-name { color: var(--text); }
-    .track-item.active .t-name { 
-      color: var(--text); 
-      font-weight: 500;
-    }
+/* Vol in settings */
+.vol-set-row{display:flex;align-items:center;gap:12px}
+.vol-set-sl{
+  flex:1;-webkit-appearance:none;appearance:none;
+  height:3px;background:rgba(255,255,255,.1);
+  border-radius:3px;outline:none;cursor:pointer;
+}
+.vol-set-sl::-webkit-slider-thumb{
+  -webkit-appearance:none;width:18px;height:18px;
+  background:var(--blue);border-radius:50%;cursor:pointer;
+  box-shadow:0 0 12px var(--bglow);
+  transition:transform .15s var(--spring);
+}
+.vol-set-sl:active::-webkit-slider-thumb{transform:scale(1.2)}
+.vol-set-sl::-moz-range-thumb{width:18px;height:18px;background:var(--blue);border:none;border-radius:50%;cursor:pointer}
+.vol-set-pct{font-family:var(--fm);font-size:.58rem;color:var(--t3);min-width:30px;text-align:right}
 
-    .t-wave {
-      display: none;
-      gap: 3px;
-      align-items: flex-end;
-      height: 14px;
-      flex-shrink: 0;
-    }
-    .track-item.active .t-wave { display: flex; }
-    .t-wave span {
-      width: 3px;
-      background: linear-gradient(to top, var(--gold), var(--gold-light));
-      border-radius: 3px;
-      animation: wave 0.6s ease-in-out infinite alternate;
-      box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
-    }
-    .t-wave span:nth-child(1) { animation-duration: 0.5s; height: 5px; }
-    .t-wave span:nth-child(2) { animation-duration: 0.8s; height: 10px; animation-delay: 0.1s; }
-    .t-wave span:nth-child(3) { animation-duration: 0.6s; height: 7px; animation-delay: 0.2s; }
-    @keyframes wave { 
-      0% { transform: scaleY(0.4); } 
-      100% { transform: scaleY(1); } 
-    }
-    .track-item.active.paused .t-wave span { 
-      animation: none; 
-      transform: scaleY(0.4);
-      opacity: 0.5;
-    }
+/* About card */
+.about-card{
+  background:var(--card);border-radius:18px;
+  border:1px solid rgba(255,255,255,.05);
+  padding:24px;
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  text-align:center;
+  margin-bottom:12px;
+}
+.about-logo{width:48px;height:48px;border-radius:14px;background:var(--s3);display:flex;align-items:center;justify-content:center;box-shadow:0 0 24px var(--bglow)}
+.about-logo img{width:26px;filter:brightness(0) invert(1)}
+.about-name{font-family:var(--ff);font-size:1.4rem;font-weight:400;color:var(--t1)}
+.about-sub{font-family:var(--fm);font-size:.52rem;letter-spacing:.15em;color:var(--t3);text-transform:uppercase}
+.about-rotname{font-family:var(--fm);font-size:.52rem;letter-spacing:.12em;color:var(--blue);margin-top:2px;transition:opacity .3s}
+.about-tags{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.atag{
+  font-family:var(--fm);font-size:.5rem;letter-spacing:.1em;
+  color:var(--t3);border:1px solid rgba(255,255,255,.07);
+  padding:5px 12px;border-radius:20px;text-transform:uppercase;
+}
+.atag.hi{color:var(--blue);border-color:var(--bd);background:var(--bdim)}
 
-    /* ===== MODAL ===== */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10000;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.4s var(--ease);
-    }
-    .modal-overlay.show { 
-      opacity: 1; 
-      visibility: visible; 
-    }
-
-    .download-modal {
-      background: var(--surface2);
-      border: 1px solid rgba(212, 175, 55, 0.15);
-      border-radius: var(--radius-xl);
-      padding: 36px 32px;
-      width: min(420px, 90vw);
-      box-shadow: 0 50px 100px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(212, 175, 55, 0.1);
-      transform: translateY(30px);
-      transition: transform 0.5s var(--ease-spring);
-    }
-    .modal-overlay.show .download-modal { transform: translateY(0); }
-
-    .modal-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 28px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    .modal-head h3 {
-      font-family: var(--font-display);
-      font-size: 1.6rem;
-      font-weight: 300;
-      color: var(--text);
-      letter-spacing: -0.01em;
-    }
-    .modal-x {
-      background: none;
-      border: none;
-      color: var(--text-dim);
-      font-size: 28px;
-      line-height: 1;
-      cursor: pointer;
-      padding: 8px 12px;
-      border-radius: var(--radius-sm);
-      transition: all 0.2s;
-    }
-    .modal-x:hover { 
-      color: var(--text); 
-      background: rgba(255, 255, 255, 0.05); 
-    }
-
-    .modal-opt {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      padding: 18px 22px;
-      margin: 10px 0;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      border-radius: var(--radius-lg);
-      color: var(--text-mid);
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: all 0.2s var(--ease);
-      cursor: pointer;
-      width: 100%;
-    }
-    .modal-opt:hover {
-      background: rgba(255, 255, 255, 0.04);
-      border-color: var(--gold-border);
-      color: var(--text);
-      transform: translateY(-2px);
-    }
-    .modal-opt-icon { 
-      width: 28px; 
-      height: 28px; 
-      flex-shrink: 0; 
-    }
-    .modal-opt span { 
-      flex: 1; 
-      text-align: left; 
-      font-weight: 400; 
-    }
-    .modal-opt .opt-arrow {
-      font-size: 0.8rem;
-      opacity: 0.4;
-      transition: all 0.2s;
-    }
-    .modal-opt:hover .opt-arrow { 
-      opacity: 1; 
-      transform: translateX(4px); 
-    }
-    .modal-opt.downloading { 
-      opacity: 0.5; 
-      pointer-events: none; 
-      cursor: wait; 
-    }
-
-    /* ===== FOOTER ===== */
-    .footer-bar {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 12px;
-      padding: 24px 8px 8px;
-      font-family: var(--font-mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      color: var(--text-dim);
-      text-transform: uppercase;
-    }
-    .footer-logo { 
-      height: 18px; 
-      filter: brightness(0) invert(0.4); 
-      opacity: 0.7;
-    }
-    .footer-sep { opacity: 0.3; }
-    .heart { 
-      color: #c06060; 
-      animation: heartbeat 1.8s ease-in-out infinite; 
-      display: inline-block;
-      filter: drop-shadow(0 0 5px rgba(192, 96, 96, 0.3));
-    }
-    @keyframes heartbeat { 
-      0%, 100% { transform: scale(1); } 
-      50% { transform: scale(1.2); } 
-    }
-
-    #rotating-name {
-      display: inline-block;
-      width: 80px;
-      text-align: center;
-      transition: opacity 0.4s ease;
-      color: var(--gold);
-      font-weight: 500;
-    }
-
-    /* Watermark - ultra subtle */
-    .watermark {
-      position: fixed;
-      bottom: 20px;
-      right: 24px;
-      opacity: 0.03;
-      pointer-events: none;
-      z-index: 1;
-      filter: blur(1px);
-    }
-    .watermark img { 
-      height: 48px; 
-      filter: brightness(0) invert(1); 
-    }
-
-    /* ===== MOBILE LAYOUT - refined ===== */
-    @media (max-width: 700px) {
-      body { 
-        padding: 16px 14px 100px; 
-      }
-      
-      .player-side { 
-        padding: 32px 24px 28px; 
-      }
-      
-      .song-title-large { 
-        font-size: 2rem; 
-      }
-      
-      .song-badges { 
-        margin-bottom: 20px; 
-      }
-      
-      .visualizer { 
-        height: 40px; 
-        margin-bottom: 24px; 
-      }
-      
-      .lyrics-display { 
-        max-height: calc(100vh - 450px); 
-        min-height: 160px; 
-        font-size: 0.9rem; 
-        padding: 16px 16px 16px 24px;
-      }
-      
-      .controls-panel { 
-        display: none; 
-      }
-      
-      .progress-section { 
-        margin-bottom: 20px; 
-      }
-      
-      .bitrate-badge { 
-        font-size: 0.5rem; 
-        padding: 4px 10px; 
-        top: 16px; 
-        right: 16px; 
-      }
-
-      /* Floating controls - premium mobile */
-      .floating-controls {
-        display: flex;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 1000;
-        background: rgba(5, 5, 5, 0.8);
-        backdrop-filter: blur(25px);
-        -webkit-backdrop-filter: blur(25px);
-        border-top: 1px solid rgba(212, 175, 55, 0.15);
-        padding: 16px 24px 28px;
-        align-items: center;
-        justify-content: space-around;
-        gap: 8px;
-        box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.6);
-      }
-      
-      .floating-controls .ctrl-btn { 
-        width: 48px; 
-        height: 48px; 
-      }
-      
-      .floating-controls .ctrl-btn svg { 
-        width: 22px; 
-        height: 22px; 
-      }
-      
-      .floating-controls .play-btn { 
-        width: 64px; 
-        height: 64px; 
-      }
-      
-      .floating-controls .play-btn svg { 
-        width: 28px; 
-        height: 28px; 
-      }
-      
-      .playlist-side { 
-        max-height: 350px; 
-      }
-    }
-
-    .floating-controls { display: none; }
-
-    @media (min-width: 701px) {
-      .floating-controls { display: none !important; }
-    }
-
-    /* ===== TABLET & DESKTOP ===== */
-    @media (min-width: 768px) {
-      .main-card {
-        grid-template-columns: 1.2fr 0.9fr;
-        grid-template-rows: auto;
-      }
-      .player-side {
-        border-bottom: none;
-        border-right: 1px solid rgba(212, 175, 55, 0.08);
-        padding: 44px 40px 40px;
-      }
-      .playlist-side { 
-        max-height: 580px; 
-      }
-    }
-
-    @media (min-width: 1200px) {
-      .main-card { 
-        grid-template-columns: 1.3fr 0.9fr; 
-      }
-      .player-side { 
-        padding: 56px 48px 48px; 
-      }
-      .song-title-large { 
-        font-size: 3.6rem; 
-      }
-      .lyrics-display { 
-        max-height: 280px; 
-        font-size: 1rem; 
-      }
-    }
-  </style>
+/* ═══ MODAL ═══ */
+.modal-bg{
+  position:fixed;inset:0;z-index:8000;
+  background:rgba(5,5,15,.8);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  display:flex;align-items:flex-end;justify-content:center;
+  opacity:0;visibility:hidden;
+  transition:all .3s var(--ease);
+}
+.modal-bg.on{opacity:1;visibility:visible}
+.modal{
+  background:var(--s2);
+  border:1px solid rgba(255,255,255,.08);
+  border-bottom:none;
+  border-radius:28px 28px 0 0;
+  width:100%;
+  padding:28px 24px calc(var(--sab) + 28px);
+  box-shadow:0 -20px 60px rgba(0,0,0,.6);
+  transform:translateY(100%);
+  transition:transform .4s var(--spring);
+}
+.modal-bg.on .modal{transform:translateY(0)}
+.modal-pill{
+  width:36px;height:4px;background:rgba(255,255,255,.15);
+  border-radius:4px;margin:0 auto 22px;
+}
+.modal-ttl{
+  font-family:var(--ff);font-size:1.35rem;font-weight:400;color:var(--t1);
+  margin-bottom:6px;
+}
+.modal-sub{font-family:var(--fm);font-size:.55rem;letter-spacing:.1em;color:var(--t3);margin-bottom:22px}
+.modal-opt{
+  display:flex;align-items:center;gap:16px;
+  padding:16px 18px;border-radius:16px;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);
+  cursor:pointer;transition:all .15s;margin-bottom:10px;
+  width:100%;
+}
+.modal-opt:active{background:rgba(78,128,238,.08);border-color:var(--bd);transform:scale(.99)}
+.modal-opt.dl-ing{opacity:.4;pointer-events:none}
+.mo-ico{width:26px;height:26px;flex-shrink:0}
+.mo-txt{flex:1;text-align:left}
+.mo-name{font-size:.88rem;font-weight:600;color:var(--t1)}
+.mo-desc{font-family:var(--fm);font-size:.5rem;color:var(--t3);margin-top:3px;letter-spacing:.06em}
+.mo-arr{font-family:var(--fm);font-size:.7rem;color:var(--t3)}
+</style>
 </head>
 <body>
 
-<!-- LOGIN -->
-<div class="login-screen" id="loginScreen">
-  <img src="https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png" alt="Muhaajir" class="login-logo">
-  <div class="login-ring"></div>
-  <p class="login-hint">Memuat resonansi...</p>
+<div id="ambientBg"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="ld-logo"><img src="https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png" alt="" onerror="this.style.display='none'"></div>
+  <div class="ld-ring"></div>
+  <p class="ld-txt">Memuat Resonansi...</p>
 </div>
 
-<!-- APP -->
-<div class="app-wrap">
+<!-- VIEW: NOW PLAYING -->
+<div class="view" id="vPlayer">
+  <div class="status-row">
+    <div class="sr-pill"><span class="sr-dot"></span> Hi-Res</div>
+    <img src="https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png" class="sr-logo" alt="" onerror="this.style.display='none'">
+    <button class="sr-menu" id="btnMenu" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 
-  <div class="top-bar">
-    <div class="top-bar-brand">
-      <img src="https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png" alt="Muhaajir"
-        onerror="this.style.display='none'">
-      <span class="top-bar-label">Studio Resonansi</span>
-    </div>
-    <div class="top-bar-right">
-      <span class="sleep-badge" id="sleepBadge">⏾ <span id="sleepCountdown">--:--</span></span>
-      <span class="top-bar-year">© 2025–2026</span>
+  <div class="art-section">
+    <div class="art-outer" id="artOuter">
+      <div class="art-inner">
+        <canvas id="artCv"></canvas>
+      </div>
     </div>
   </div>
 
-  <div class="main-card">
-
-    <!-- PLAYER -->
-    <div class="player-side">
-
-      <!-- Bitrate badge -->
-      <div class="bitrate-badge">
-        <span class="bitrate-dot"></span>
-        Hi‑Res 24‑bit / 96kHz
-      </div>
-
-      <div class="now-playing-label">
-        <span class="now-playing-dot paused" id="now-dot"></span>
-        Now Playing
-      </div>
-
-      <div class="song-meta" id="display-album">Arsip Suara</div>
-      <h1 class="song-title-large" id="display-title">Memuat...</h1>
-
-      <div class="song-badges">
-        <span class="badge">Muhaajir</span>
-        <span class="badge">2025</span>
-        <span class="badge gold">No Copyright</span>
-      </div>
-
-      <div class="playback-status" id="playback-status">⏸ Dijeda</div>
-
-      <!-- Visualizer -->
-      <div class="visualizer" id="visualizer-bars">
-        <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
-        <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
-        <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
-        <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
-      </div>
-
-      <!-- Lyrics -->
-      <div class="lyrics-wrap">
-        <div class="lyrics-display" id="lyrics-display">
-          <span class="lyric-line active-lyric">🎧 Pilih lagu dari daftar putar untuk mulai.</span>
-        </div>
-      </div>
-
-      <!-- Progress -->
-      <div class="progress-section">
-        <div class="progress-track" id="prog-root">
-          <div id="progress-fill"></div>
-        </div>
-        <div class="time-row">
-          <span id="time-now">0:00</span>
-          <span id="time-end">0:00</span>
-        </div>
-      </div>
-
-      <!-- Controls (desktop) -->
-      <div class="controls-panel">
-        <div class="controls-row">
-          <!-- Shuffle -->
-          <button class="ctrl-btn" id="shuffle-btn" title="Acak">
-            <svg viewBox="0 0 24 24"><path d="M16 3h5v5M4 20 21 3M16 20h5v-5M4 4l5 5M9 15l-5 5"/></svg>
-          </button>
-          <!-- Prev -->
-          <button class="ctrl-btn" id="prev-btn" title="Sebelumnya">
-            <svg viewBox="0 0 24 24"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
-          </button>
-          <!-- Play -->
-          <button class="play-btn" id="play-trigger">
-            <svg id="play-icon-svg" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor"/></svg>
-          </button>
-          <!-- Next -->
-          <button class="ctrl-btn" id="next-btn" title="Selanjutnya">
-            <svg viewBox="0 0 24 24"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
-          </button>
-          <!-- Repeat -->
-          <button class="ctrl-btn" id="repeat-btn" title="Ulangi">
-            <svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-          </button>
-          <div class="ctrl-spacer"></div>
-          <!-- Share -->
-          <button class="ctrl-btn" id="share-icon-btn" title="Bagikan">
-            <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-          </button>
-          <!-- Download -->
-          <button class="ctrl-btn" id="download-btn" title="Unduh">
-            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          </button>
-        </div>
-
-        <!-- Volume -->
-        <div class="vol-row">
-          <span class="vol-label">
-            <svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-          </span>
-          <input type="range" class="vol-slider" id="vol-slider" min="0" max="1" step="0.01" value="0.7">
-          <span class="vol-value" id="vol-display">70%</span>
-        </div>
-
-        <!-- Sleep Timer -->
-        <div class="sleep-row">
-          <span class="sleep-label">
-            <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-            Tidur
-          </span>
-          <select class="sleep-select" id="sleep-select">
-            <option value="">— Pilih Durasi —</option>
-            <option value="900">15 Menit</option>
-            <option value="1800">30 Menit</option>
-            <option value="3600">60 Menit</option>
-            <option value="5400">90 Menit</option>
-          </select>
-          <button class="sleep-start-btn" id="sleep-start-btn">Aktifkan</button>
-          <button class="sleep-cancel-btn" id="sleep-cancel-btn">Batalkan</button>
-        </div>
-      </div>
-
-    </div><!-- end player-side -->
-
-    <!-- PLAYLIST -->
-    <div class="playlist-side">
-      <div class="playlist-header">
-        <span class="playlist-title">Daftar Putar · Original</span>
-        <span class="playlist-count" id="track-count">12 Lagu</span>
-      </div>
-      <div class="playlist-scroll" id="playlist-inject"></div>
+  <div class="info-section">
+    <div class="info-top">
+      <h1 class="info-title" id="npTitle">Pilih lagu...</h1>
+      <button class="info-fav" id="btnFav" aria-label="Favorit">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </button>
     </div>
-
-  </div><!-- end main-card -->
-
-  <!-- FOOTER -->
-  <div class="footer-bar">
-    <img src="https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png" class="footer-logo" alt="µ"
-      onerror="this.style.display='none'">
-    <span class="footer-sep">·</span>
-    <span>Dibuat dengan <span class="heart">♥</span> oleh</span>
-    <span id="rotating-name">Regina</span>
+    <div class="info-album" id="npAlbum">Muhaajir · 2025</div>
   </div>
 
-</div><!-- end app-wrap -->
+  <div class="prog-section">
+    <div class="prog-track" id="progTrack"><div id="pFill"></div></div>
+    <div class="time-row"><span id="tNow">0:00</span><span id="tEnd">0:00</span></div>
+  </div>
 
-<!-- FLOATING CONTROLS (mobile) -->
-<div class="floating-controls" id="floating-controls">
-  <button class="ctrl-btn" id="prev-btn-m" title="Sebelumnya">
-    <svg viewBox="0 0 24 24"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
-  </button>
-  <button class="play-btn" id="play-trigger-m">
-    <svg id="play-icon-svg-m" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" fill="currentColor"/></svg>
-  </button>
-  <button class="ctrl-btn" id="next-btn-m" title="Selanjutnya">
-    <svg viewBox="0 0 24 24"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
-  </button>
-  <button class="ctrl-btn" id="download-btn-m" title="Unduh">
-    <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-  </button>
+  <div class="ctrl-section">
+    <div class="ctrl-row1">
+      <button class="cb" id="btnShuffle" aria-label="Acak">
+        <svg viewBox="0 0 24 24"><path d="M16 3h5v5M4 20 21 3M16 20h5v-5M4 4l5 5M9 15l-5 5"/></svg>
+      </button>
+      <button class="cb" id="btnPrev" aria-label="Sebelumnya">
+        <svg viewBox="0 0 24 24"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
+      </button>
+      <button class="play-big" id="btnPlay" aria-label="Play/Pause">
+        <svg id="playSvg" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </button>
+      <button class="cb" id="btnNext" aria-label="Selanjutnya">
+        <svg viewBox="0 0 24 24"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
+      </button>
+      <button class="cb" id="btnRepeat" aria-label="Ulangi">
+        <svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="vol-section">
+    <div class="vol-row">
+      <span class="vol-ico"><svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/></svg></span>
+      <input type="range" class="vol-sl" id="volSl" min="0" max="1" step="0.01" value="0.7">
+      <span class="vol-pct" id="volPct">70%</span>
+    </div>
+  </div>
+
+  <div class="action-section">
+    <button class="act-btn" id="btnShare" aria-label="Bagikan">
+      <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+    </button>
+    <button class="act-btn" id="btnDl" aria-label="Unduh">
+      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    </button>
+    <button class="act-btn" id="btnTimer" aria-label="Timer tidur">
+      <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+
+  <!-- Bottom nav -->
+  <div class="bottom-nav">
+    <button class="nav-btn on" data-view="vPlayer">
+      <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      <span>Putar</span>
+    </button>
+    <button class="nav-btn" data-view="vLyrics">
+      <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <span>Lirik</span>
+    </button>
+    <button class="nav-btn" data-view="vPlaylist">
+      <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      <span>Lagu</span>
+    </button>
+    <button class="nav-btn" data-view="vSettings">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+      <span>Lainnya</span>
+    </button>
+  </div>
+</div>
+
+<!-- VIEW: LYRICS -->
+<div class="view hidden" id="vLyrics">
+  <div class="lyr-head">
+    <div class="lyr-head-left">
+      <button class="back-btn" data-view="vPlayer" aria-label="Kembali">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <span class="lyr-head-title">Lirik</span>
+    </div>
+    <div class="lyr-viz" id="lyrViz">
+      <div class="lv"></div><div class="lv"></div><div class="lv"></div><div class="lv"></div>
+    </div>
+  </div>
+  <div class="lyr-song-info">
+    <div class="lyr-song-title" id="lyrTitle">—</div>
+    <div class="lyr-song-album" id="lyrAlbum">—</div>
+  </div>
+  <div class="lyr-body" id="lyrBody">
+    <div class="lyr-line empty">
+      <svg class="lyr-empty-icon" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      Pilih lagu untuk lirik
+    </div>
+  </div>
+  <div class="lyr-mini">
+    <div class="lyr-mini-top">
+      <div class="lyr-mini-art"><canvas id="lyrMiniCv"></canvas></div>
+      <div class="lyr-mini-info">
+        <div class="lyr-mini-title" id="lyrMiniTitle">—</div>
+        <div class="lyr-mini-album">Muhaajir</div>
+      </div>
+      <div class="lyr-mini-btns">
+        <button class="lmb" id="lyrPrev" aria-label="Sebelumnya">
+          <svg viewBox="0 0 24 24"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
+        </button>
+        <button class="lmb play-mini" id="lyrPlay" aria-label="Play/Pause">
+          <svg id="lyrPlaySvg" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </button>
+        <button class="lmb" id="lyrNext" aria-label="Selanjutnya">
+          <svg viewBox="0 0 24 24"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="lyr-mini-prog" id="lyrProgBar"><div id="lyrPFill"></div></div>
+  </div>
+  <div class="bottom-nav">
+    <button class="nav-btn" data-view="vPlayer"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg><span>Putar</span></button>
+    <button class="nav-btn on" data-view="vLyrics"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Lirik</span></button>
+    <button class="nav-btn" data-view="vPlaylist"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg><span>Lagu</span></button>
+    <button class="nav-btn" data-view="vSettings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg><span>Lainnya</span></button>
+  </div>
+</div>
+
+<!-- VIEW: PLAYLIST -->
+<div class="view hidden" id="vPlaylist">
+  <div class="pl-head">
+    <span class="pl-head-title">Daftar Putar · Original</span>
+    <span class="pl-count" id="plCount">12 Lagu</span>
+  </div>
+  <div class="pl-scroll" id="plScroll"></div>
+  <div class="pl-mini">
+    <div class="pl-mini-inner">
+      <div class="pl-mini-art"><canvas id="plMiniCv"></canvas></div>
+      <div class="pl-mini-info">
+        <div class="pl-mini-title" id="plMiniTitle">—</div>
+        <div class="pl-mini-sub">Muhaajir</div>
+      </div>
+      <button class="pl-mini-play" id="plPlay" aria-label="Play/Pause">
+        <svg id="plPlaySvg" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </button>
+    </div>
+    <div class="pl-mini-prog"><div id="plPFill"></div></div>
+  </div>
+  <div class="bottom-nav">
+    <button class="nav-btn" data-view="vPlayer"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg><span>Putar</span></button>
+    <button class="nav-btn" data-view="vLyrics"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Lirik</span></button>
+    <button class="nav-btn on" data-view="vPlaylist"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg><span>Lagu</span></button>
+    <button class="nav-btn" data-view="vSettings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg><span>Lainnya</span></button>
+  </div>
+</div>
+
+<!-- VIEW: SETTINGS -->
+<div class="view hidden" id="vSettings">
+  <div class="set-head">
+    <span class="set-head-title">Pengaturan &amp; Info</span>
+  </div>
+  <div class="set-body">
+    <div class="about-card">
+      <div class="about-logo"><img src="https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png" alt="" onerror="this.style.display='none'"></div>
+      <div class="about-name">Muhaajir Music</div>
+      <div class="about-sub">Studio Resonansi · 2025–2026</div>
+      <div class="about-rotname">Dibuat oleh <span id="rotName">Regina</span></div>
+      <div class="about-tags">
+        <span class="atag">Muhaajir</span>
+        <span class="atag hi">No Copyright</span>
+        <span class="atag">Original</span>
+      </div>
+    </div>
+
+    <div class="set-section">
+      <div class="set-sec-label">Pemutaran</div>
+      <div class="set-card">
+        <div class="set-row">
+          <div class="set-row-ico"><svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></div>
+          <div class="set-row-txt">
+            <div class="set-row-name">Volume</div>
+            <div class="set-row-sub" id="volSetSub">70%</div>
+          </div>
+          <div class="vol-set-row" style="width:120px">
+            <input type="range" class="vol-set-sl" id="volSetSl" min="0" max="1" step="0.01" value="0.7">
+            <span class="vol-set-pct" id="volSetPct">70%</span>
+          </div>
+        </div>
+        <div class="set-row">
+          <div class="set-row-ico"><svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
+          <div class="set-row-txt">
+            <div class="set-row-name">Timer Tidur</div>
+            <div class="set-row-sub" id="sleepStatus">Tidak aktif</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+            <div class="sleep-inline">
+              <select class="sleep-sel" id="sleepSel">
+                <option value="">— Pilih —</option>
+                <option value="900">15 Mnt</option>
+                <option value="1800">30 Mnt</option>
+                <option value="3600">60 Mnt</option>
+                <option value="5400">90 Mnt</option>
+              </select>
+              <button class="sleep-go" id="sleepGo">Set</button>
+              <button class="sleep-stop" id="sleepStop">✕</button>
+            </div>
+            <div class="sleep-cd" id="sleepCd">
+              <span class="sc-dot"></span>
+              <span id="sleepCdTxt">--:--</span> tersisa
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="set-section">
+      <div class="set-sec-label">Aksi Cepat</div>
+      <div class="set-card">
+        <div class="set-row" id="setShare" style="cursor:pointer">
+          <div class="set-row-ico"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div>
+          <div class="set-row-txt">
+            <div class="set-row-name">Bagikan Lagu</div>
+            <div class="set-row-sub">Via WhatsApp</div>
+          </div>
+          <svg style="width:14px;height:14px;stroke:var(--t3);fill:none;stroke-width:2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+        <div class="set-row" id="setDl" style="cursor:pointer">
+          <div class="set-row-ico"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+          <div class="set-row-txt">
+            <div class="set-row-name">Unduh Lagu</div>
+            <div class="set-row-sub">Google Drive / Dropbox</div>
+          </div>
+          <svg style="width:14px;height:14px;stroke:var(--t3);fill:none;stroke-width:2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-nav">
+    <button class="nav-btn" data-view="vPlayer"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg><span>Putar</span></button>
+    <button class="nav-btn" data-view="vLyrics"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Lirik</span></button>
+    <button class="nav-btn" data-view="vPlaylist"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg><span>Lagu</span></button>
+    <button class="nav-btn on" data-view="vSettings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg><span>Lainnya</span></button>
+  </div>
 </div>
 
 <!-- MODAL DOWNLOAD -->
-<div class="modal-overlay" id="downloadModalOverlay">
-  <div class="download-modal">
-    <div class="modal-head">
-      <h3>Unduh Lagu</h3>
-      <button class="modal-x" id="modalCloseBtn">&times;</button>
-    </div>
-    <!-- SERVER 1: Google Drive -->
-    <div class="modal-opt" id="modalGdriveOption">
-      <svg class="modal-opt-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M4.42 17.18l1.02 1.76c.21.37.51.66.87.87L9.5 15H4c0 .41.11.82.31 1.18l.11.18v-.18z" fill="#0066DA"/>
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <div class="modal-pill"></div>
+    <div class="modal-ttl">Unduh Lagu</div>
+    <div class="modal-sub" id="modalSub">Pilih server unduhan</div>
+    <div class="modal-opt" id="optGd">
+      <svg class="mo-ico" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4.42 17.18l1.02 1.76c.21.37.51.66.87.87L9.5 15H4c0 .41.11.82.31 1.18z" fill="#0066DA"/>
         <path d="M12 8l-3.5 6H15l-3-6z" fill="#00AC47"/>
-        <path d="M19.69 19.81c.36-.21.66-.5.87-.87L20.56 19l1.02-1.76C21.79 16.88 22 16.45 22 16H16.5l2.5 4.5-.19-.5c.14-.06.27-.12.38-.19z" fill="#EA4335"/>
-        <path d="M12 8L8.5 14H4c0-.41.11-.82.31-1.18l4.19-7.26c.42-.72 1.19-1.06 1.5-1.06s1.08.34 1.5 1.06L12 8z" fill="#00832D"/>
+        <path d="M19.69 19.81c.36-.21.66-.5.87-.87L20.56 19l1.02-1.76C21.79 16.88 22 16.45 22 16H16.5z" fill="#EA4335"/>
+        <path d="M12 8L8.5 14H4c0-.41.11-.82.31-1.18l4.19-7.26C8.92 4.84 9.69 4.5 10 4.5s1.08.34 1.5 1.06L12 8z" fill="#00832D"/>
         <path d="M16.5 14H8.5L12 8l1.5 2.6L15 14h1.5z" fill="#2684FC"/>
-        <path d="M19.69 4.56l-4.19 7.26A2.99 2.99 0 0 1 16.5 14H22c0-.41-.11-.82-.31-1.18L17.5 5.56c-.42-.72-1.19-1.06-1.5-1.06s-1.08.34-1.5 1.06l.19.5c.14.06.27.12.38.19.18.1.34.24.47.38l.15.17.5.76z" fill="#FFBA00"/>
-        <path d="M9.5 15H14.5l.5 1H9l.5-1zM4 16H9.5L6.31 20.69c-.36-.21-.66-.5-.87-.87L4.44 18.18C4.16 17.65 4 17.07 4 16z" fill="#0066DA"/>
-        <path d="M14.5 15H20c0 .45-.11.89-.31 1.18L18.56 18 16.19 21.5c-.36.21-.77.5-1.19.5H9c-.42 0-.83-.29-1.19-.5L6.31 18 4.44 16.18C4.16 15.65 4 15.07 4 15h10.5z" fill="#FFBA00" opacity=".01"/>
+        <path d="M19.69 4.56l-4.19 7.26A2.99 2.99 0 0 1 16.5 14H22c0-.41-.11-.82-.31-1.18L17.5 5.56C17.08 4.84 16.31 4.5 16 4.5s-1.08.34-1.5 1.06z" fill="#FFBA00"/>
       </svg>
-      <span>Server 1 — Google Drive</span>
-      <span class="opt-arrow">↗</span>
+      <div class="mo-txt">
+        <div class="mo-name">Server 1 — Google Drive</div>
+        <div class="mo-desc">Kecepatan tinggi · Langsung</div>
+      </div>
+      <span class="mo-arr">↗</span>
     </div>
-    <!-- SERVER 2: Dropbox -->
-    <div class="modal-opt" id="modalDropboxOption">
-      <svg class="modal-opt-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="modal-opt" id="optDb">
+      <svg class="mo-ico" viewBox="0 0 24 24">
         <path d="M12 6.5L6 10.5L12 14.5L6 18.5L0 14.5L6 10.5L0 6.5L6 2.5L12 6.5Z" fill="#0061FF"/>
         <path d="M12 6.5L18 2.5L24 6.5L18 10.5L24 14.5L18 18.5L12 14.5L18 10.5L12 6.5Z" fill="#0061FF"/>
         <path d="M6 19.7L12 15.7L18 19.7L12 23.7L6 19.7Z" fill="#0061FF"/>
       </svg>
-      <span>Server 2 — Dropbox</span>
-      <span class="opt-arrow">↗</span>
+      <div class="mo-txt">
+        <div class="mo-name">Server 2 — Dropbox</div>
+        <div class="mo-desc">Mirror · Backup server</div>
+      </div>
+      <span class="mo-arr">↗</span>
     </div>
   </div>
 </div>
 
-<!-- AUDIO -->
-<audio id="audio-engine" preload="metadata"></audio>
-
-<!-- WATERMARK -->
-<div class="watermark">
-  <img src="https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png" alt="" onerror="this.style.display='none'">
-</div>
+<audio id="aud" preload="metadata"></audio>
 
 <script>
-(function () {
-  'use strict';
+(function(){
+'use strict';
 
-  /* ====== DATA ====== */
-  const rawSongs = [
-    { name:"Lintasan Tak Bermakna",   group:"Fragmen Suara",         url:"https://www.dropbox.com/scl/fi/42d6gtx7f7tocie3whf2h/primary-3ADownload-2Fmuhaajir-2Fmusic-2FMuhaajir-20-20Lintasan-20Tak-20Bermakna.mp3?rlkey=9bim2pumtfjcwmrhq9127fnpd&st=6e9nrwwe&raw=1", gdId:"1_Dn7CsNUNkECXotJYZcofSV90--d0mbg" },
-    { name:"Padahal Sudah Bilang",     group:"Fragmen Suara",         url:"https://www.dropbox.com/scl/fi/30o3te9g5k0mparg46ugd/primary-3ADownload-2Fmuhaajir-2Fmusic-2FMuhaajir-20-20Padahal-20Sudah-20Bilang.mp3?rlkey=iz0oliiy3ddlzh4m84jw1oacb&st=coy2ftp3&raw=1", gdId:"1xDIhBggeN2hbveqyMWE5Q6wCOqxllboP" },
-    { name:"Mimpi yang Tertunda",      group:"Fragmen Suara",         url:"https://www.dropbox.com/scl/fi/ii4rxckfguu3hg2d7czdz/primary-3ADownload-2Fmuhaajir-2Fmusic-2FMuhaajir-20-20Mimpi-20yang-20Tertunda.mp3?rlkey=5iyrx794rg46bj1zyo3gret6e&st=n45d3ba1&raw=1", gdId:"1Iu5Ecf105P-KsxUrqIhNajmhIvKXzJfk" },
-    { name:"Langit Masih Sama",        group:"Fragmen Suara",         url:"https://www.dropbox.com/scl/fi/bmrmy3eglkxxqcqp0klou/primary-3ADownload-2Fmuhaajir-2Fmusic-2FMuhaajir-20-20Langit-20Masih-20Sama.mp3?rlkey=j3o7h2letkcf4vkekkj0uga7z&st=kevxjqpn&raw=1", gdId:"1zBxxORALIkAdsWDK6L-rvrUIxYkpHNGT" },
-    { name:"Suatu Hari Nanti",         group:"Fragmen Suara",         url:"https://www.dropbox.com/scl/fi/kph6ukril5n4ybsvavncd/primary-3ADownload-2Fmuhaajir-2Fmusic-2FMuhaajir-20-20Suatu-20Hari-20Nanti.mp3?rlkey=76ltwumwy64f87swdqmof2y9j&st=vuu0iqhs&raw=1", gdId:"1XGef_7uBzQyiXnRr34CbBaWOt3-GssOd" },
-    { name:"Nada Terpendam",           group:"Resonansi Dalam Diam",  url:"https://www.dropbox.com/scl/fi/jvnjos6dltx1rqcnkhbp2/primary-3ADownload-2Fmuhaajir-2Fmusic-2FMuhaajir-20-20Nada-20Terpendam.mp3?rlkey=unmjdgs3espvoq2dtyswimxmy&st=tjm8j8k1&raw=1", gdId:"1nlR4fIW9OL3KTPSU9cCLW9rESA3A1sCb" },
-    { name:"Langit Patah Arah",        group:"Resonansi Dalam Diam",  url:"https://www.dropbox.com/scl/fi/60npnlmfphhtcirdyhqyq/primary-3ADownload-2Fmuhaajir-2Fmusic-2FMuhaajir-20-20Langit-20Patah-20Arah.mp3?rlkey=aevobshzsuuecl9vu3ozt655o&st=rt21gjkt&raw=1", gdId:"17R1mc6FwqbK25ynWDw9CIIM7YrbAMqJ0" },
-    { name:"Tak Bernama, Tapi Ada",    group:"Resonansi Dalam Diam",  url:"https://www.dropbox.com/scl/fi/y7ei6d66334mzpjwvxxr7/primary-3ADownload-2Fmuhaajir-2Fmusic-2FMuhaajir-20-20Tak-20Bernama-2C-20Tapi-20Ada.mp3?rlkey=joauzm5e5vh4lbca1ccgpjwvt&st=1kd6ap8l&raw=1", gdId:"1OkeF_VH1NJWJS-99N4kt9K5Wg1yxN37G" },
-    { name:"Resonansi Dalam Diam",     group:"Resonansi Dalam Diam",  url:"https://www.dropbox.com/scl/fi/ovgaej9nunwwuwykszjs2/primary-3ADownload-2Fmuhaajir-2Fmusic-2FMuhaajir-20-20Resonansi-20Dalam-20Diam.mp3?rlkey=ahn32s08fhvnfmiic5fu3jdvw&st=s46e5vva&raw=1", gdId:"1KFkKvwmFw8Fzo6ErCa65v_--BahudXM6" },
-    { name:"Runtuh Tanpa Suara",       group:"Resonansi Dalam Diam",  url:"https://www.dropbox.com/scl/fi/34m3ymxxned40jfkegkkq/primary-3ADownload-2Fmuhaajir-2Fmusic-2FMuhaajir-20-20Runtuh-20Tanpa-20Suara.mp3?rlkey=65hjocwfjfr7bxo8mxofrcxqz&st=vdbtdvv0&raw=1", gdId:"1v3vSjYL98fXKKgMpn_nhV-IDjsQvv_FU" },
-    { name:"Kilau Tanpa Sorotan",      group:"Resonansi Dalam Diam",  url:"https://www.dropbox.com/scl/fi/ok2arwnaph6mt5rfmfb10/primary-3ADownload-2Fmuhaajir-2Fmusic-2FMuhaajir-20-20Kilau-20Tanpa-20Sorotan.mp3?rlkey=6dsjfah665xk9m96tg83ynh6h&st=tr477auo&raw=1", gdId:"1PAdvzfPDXl7IeOloMDM5gngeTV0KGcIV" },
-    { name:"Gelombang Terakhir",       group:"Resonansi Dalam Diam",  url:"https://www.dropbox.com/scl/fi/jy8rav5ef4f2co9jy0hmi/primary-3ADownload-2Fmuhaajir-2Fmusic-2FMuhaajir-20-20Gelombang-20Terakhir.mp3?rlkey=bfl4zqkolb0p8vm7kt0cbbtfn&st=txi8i6zt&raw=1", gdId:"1094sBXRKLQ2c_3fdYJjRuykxKPP0lOfx" }
-  ];
+/* ═══ SONGS ═══ */
+const songs=[
+  {name:"Lintasan Tak Bermakna",group:"Fragmen Suara",url:"https://www.dropbox.com/scl/fi/42d6gtx7f7tocie3whf2h/primary-3ADownload-2Fmuhaajir-2Fmusic-2FMuhaajir-20-20Lintasan-20Tak-20Bermakna.mp3?rlkey=9bim2pumtfjcwmrhq9127fnpd&st=6e9nrwwe&raw=1",gdId:"1_Dn7CsNUNkECXotJYZcofSV90--d0mbg"},
+  {name:"Padahal Sudah Bilang",group:"Fragmen Suara",url:"https://www.dropbox.com/scl/fi/30o3te9g5k0mparg46ugd/primary-3ADownload-2Fmuhaajir-2Fmusic-2FMuhaajir-20-20Padahal-20Sudah-20Bilang.mp3?rlkey=iz0oliiy3ddlzh4m84jw1oacb&st=coy2ftp3&raw=1",gdId:"1xDIhBggeN2hbveqyMWE5Q6wCOqxllboP"},
+  {name:"Mimpi yang Tertunda",group:"Fragmen Suara",url:"https://www.dropbox.com/scl/fi/ii4rxckfguu3hg2d7czdz/primary-3ADownload-2Fmuhaajir-2Fmusic-2FMuhaajir-20-20Mimpi-20yang-20Tertunda.mp3?rlkey=5iyrx794rg46bj1zyo3gret6e&st=n45d3ba1&raw=1",gdId:"1Iu5Ecf105P-KsxUrqIhNajmhIvKXzJfk"},
+  {name:"Langit Masih Sama",group:"Fragmen Suara",url:"https://www.dropbox.com/scl/fi/bmrmy3eglkxxqcqp0klou/primary-3ADownload-2Fmuhaajir-2Fmusic-2FMuhaajir-20-20Langit-20Masih-20Sama.mp3?rlkey=j3o7h2letkcf4vkekkj0uga7z&st=kevxjqpn&raw=1",gdId:"1zBxxORALIkAdsWDK6L-rvrUIxYkpHNGT"},
+  {name:"Suatu Hari Nanti",group:"Fragmen Suara",url:"https://www.dropbox.com/scl/fi/kph6ukril5n4ybsvavncd/primary-3ADownload-2Fmuhaajir-2Fmusic-2FMuhaajir-20-20Suatu-20Hari-20Nanti.mp3?rlkey=76ltwumwy64f87swdqmof2y9j&st=vuu0iqhs&raw=1",gdId:"1XGef_7uBzQyiXnRr34CbBaWOt3-GssOd"},
+  {name:"Nada Terpendam",group:"Resonansi Dalam Diam",url:"https://www.dropbox.com/scl/fi/jvnjos6dltx1rqcnkhbp2/primary-3ADownload-2Fmuhaajir-2Fmusic-2FMuhaajir-20-20Nada-20Terpendam.mp3?rlkey=unmjdgs3espvoq2dtyswimxmy&st=tjm8j8k1&raw=1",gdId:"1nlR4fIW9OL3KTPSU9cCLW9rESA3A1sCb"},
+  {name:"Langit Patah Arah",group:"Resonansi Dalam Diam",url:"https://www.dropbox.com/scl/fi/60npnlmfphhtcirdyhqyq/primary-3ADownload-2Fmuhaajir-2Fmusic-2FMuhaajir-20-20Langit-20Patah-20Arah.mp3?rlkey=aevobshzsuuecl9vu3ozt655o&st=rt21gjkt&raw=1",gdId:"17R1mc6FwqbK25ynWDw9CIIM7YrbAMqJ0"},
+  {name:"Tak Bernama, Tapi Ada",group:"Resonansi Dalam Diam",url:"https://www.dropbox.com/scl/fi/y7ei6d66334mzpjwvxxr7/primary-3ADownload-2Fmuhaajir-2Fmusic-2FMuhaajir-20-20Tak-20Bernama-2C-20Tapi-20Ada.mp3?rlkey=joauzm5e5vh4lbca1ccgpjwvt&st=1kd6ap8l&raw=1",gdId:"1OkeF_VH1NJWJS-99N4kt9K5Wg1yxN37G"},
+  {name:"Resonansi Dalam Diam",group:"Resonansi Dalam Diam",url:"https://www.dropbox.com/scl/fi/ovgaej9nunwwuwykszjs2/primary-3ADownload-2Fmuhaajir-2Fmusic-2FMuhaajir-20-20Resonansi-20Dalam-20Diam.mp3?rlkey=ahn32s08fhvnfmiic5fu3jdvw&st=s46e5vva&raw=1",gdId:"1KFkKvwmFw8Fzo6ErCa65v_--BahudXM6"},
+  {name:"Runtuh Tanpa Suara",group:"Resonansi Dalam Diam",url:"https://www.dropbox.com/scl/fi/34m3ymxxned40jfkegkkq/primary-3ADownload-2Fmuhaajir-2Fmusic-2FMuhaajir-20-20Runtuh-20Tanpa-20Suara.mp3?rlkey=65hjocwfjfr7bxo8mxofrcxqz&st=vdbtdvv0&raw=1",gdId:"1v3vSjYL98fXKKgMpn_nhV-IDjsQvv_FU"},
+  {name:"Kilau Tanpa Sorotan",group:"Resonansi Dalam Diam",url:"https://www.dropbox.com/scl/fi/ok2arwnaph6mt5rfmfb10/primary-3ADownload-2Fmuhaajir-2Fmusic-2FMuhaajir-20-20Kilau-20Tanpa-20Sorotan.mp3?rlkey=6dsjfah665xk9m96tg83ynh6h&st=tr477auo&raw=1",gdId:"1PAdvzfPDXl7IeOloMDM5gngeTV0KGcIV"},
+  {name:"Gelombang Terakhir",group:"Resonansi Dalam Diam",url:"https://www.dropbox.com/scl/fi/jy8rav5ef4f2co9jy0hmi/primary-3ADownload-2Fmuhaajir-2Fmusic-2FMuhaajir-20-20Gelombang-20Terakhir.mp3?rlkey=bfl4zqkolb0p8vm7kt0cbbtfn&st=txi8i6zt&raw=1",gdId:"1094sBXRKLQ2c_3fdYJjRuykxKPP0lOfx"}
+];
 
-  const lyricsMap = {
-    "Lintasan Tak Bermakna":[{time:25.13,text:"Di garis start nyali pun bicara,"},{time:29.63,text:"Mesin menderu bak suara raja."},{time:32.98,text:"Asap naik, waktu pun lenyap,"},{time:36.22,text:"Tiap tikungan, mimpi pun tajam."},{time:38.89,text:"Tak ada ragu dalam kecepatan,"},{time:41.45,text:"Lintasan adalah medan keberanian."},{time:45.00,text:"Ban berteriak dalam keyakinan,"},{time:47.76,text:"Menuju juara, penuh pengorbanan."},{time:58.29,text:"Detik berdetak di balik helm,"},{time:61.19,text:"Fokus tajam, pikiran diam."},{time:64.40,text:"Satu peluang di ujung tikungan,"},{time:67.72,text:"Sekali salah, habis harapan."},{time:70.83,text:"Di balik visor, mimpi menyala,"},{time:73.74,text:"Dibakar semangat, dinginkan raga."},{time:76.86,text:"Gas ditekan, batas dilawan,"},{time:80.23,text:"Di jalur ini, hanya pemenang bertahan."},{time:84.35,text:"Semua sepi saat melaju,"},{time:86.79,text:"Hanya angin yang tahu arahmu."},{time:89.59,text:"Keringat jatuh, hati membara,"},{time:93.10,text:"Ini bukan sekadar lomba."},{time:103.01,text:"Taklukan keraguan di tikungan tajam,"},{time:106.73,text:"Jiwa pembalap tak pernah padam."},{time:109.13,text:"Terjatuh? Bangkit! Jangan bertanya,"},{time:112.39,text:"Karena lintasan tak beri jeda."},{time:116.61,text:"Di atas aspal, cerita ditulis,"},{time:118.65,text:"Dengan kecepatan yang tak bisa ditangkap garis."},{time:121.98,text:"Gaspol! Taklukkan lintasan jadilah juara!"},{time:141.61,text:"Berdetak dibalik helm"},{time:144.72,text:"Fokus tajam, pikiran diam."},{time:147.88,text:"Satu peluang di ujung tikungan,"},{time:150.69,text:"Sekali salah, habis harapan."},{time:154.33,text:"Di balik visor, mimpi menyala,"},{time:156.90,text:"Dibakar semangat, dinginkan raga."},{time:159.99,text:"Gas ditekan, batas dilawan,"},{time:163.30,text:"Di jalur ini, hanya pemenang bertahan."},{time:167.28,text:"Semua sepi saat melaju,"},{time:169.93,text:"Hanya angin yang tahu arahmu."},{time:172.88,text:"Keringat jatuh, hati membara,"},{time:176.29,text:"Ini bukan sekadar lomba."},{time:179.73,text:"Taklukan keraguan di tikungan tajam,"},{time:182.66,text:"Jiwa pembalap tak pernah padam."},{time:186.05,text:"Terjatuh? Bangkit! Jangan bertanya,"},{time:189.00,text:"Karena lintasan tak beri jeda."},{time:192.47,text:"Di atas aspal, cerita ditulis,"},{time:194.77,text:"Dengan kecepatan yang tak bisa ditangkap garis."},{time:198.17,text:"Gaspol! Taklukkan lintasan jadilah juara!"}],
-    "Padahal Sudah Bilang":[{time:11.26,text:"Hari itu aku tak di kelas"},{time:16.62,text:"Tapi pesanku sudah sampai jelas"},{time:21.59,text:"Kuketik pelan, kuhormat seperti biasa"},{time:27.17,text:"Kirim ke wali kupikir itu cukup"},{time:33.75,text:"Tapi paginya, kulihat lembar absen"},{time:38.68,text:"Namaku hilang, tak ada keterangan"},{time:45.70,text:"Padahal sudah bilang"},{time:49.60,text:"Kusampaikan baik pada yang berwenang"},{time:54.75,text:"Tak perlu teriak, tak kurang sopan"},{time:60.74,text:"Tapi tetap saja dianggap hilang"},{time:66.86,text:"Padahal aku cuma ingin dimengerti"},{time:78.39,text:"Katanya semua punya hak bicara"},{time:82.75,text:"Tapi mengapa yang pelan tak didengar juga?"},{time:88.79,text:"Kubiarkan kepala menunduk diam"},{time:94.16,text:"Karena kata-kataku dianggap tak sampai malam"},{time:100.16,text:"Mungkin pesan itu terlewat"},{time:104.84,text:"Atau mungkin… sengaja tak dilihat"},{time:112.53,text:"Padahal sudah bilang"},{time:116.62,text:"Kujalankan aturan seperti yang diajar"},{time:122.43,text:"Tapi tetap ditulis tanpa kabar"},{time:127.98,text:"Seolah tak pernah ada niat benar"},{time:133.79,text:"Padahal aku hanya ingin dihargai"},{time:140.22,text:"(Suara pelan bukan berarti salah)"},{time:142.65,text:"(Diam bukan berarti tak usaha)"},{time:145.30,text:"(Kalau pun salahku tak cukup keras)"},{time:148.01,text:"(Mengapa kebenaran tak diberi tempat?)"},{time:154.30,text:"Padahal sudah bilang"},{time:158.84,text:"Kepada yang seharusnya mencatat"},{time:165.82,text:"Tapi tetap tertulis aku tak hadir"},{time:169.80,text:"Seolah aku menghilang tanpa jejak"},{time:175.76,text:"Padahal aku… selalu mencoba jujur"},{time:181.38,text:"Besok-besok, mungkin aku benar-benar diam"},{time:184.21,text:"Biar mereka tulis saja, tanpa keterangan"}],
-    "Mimpi yang Tertunda":[{time:8.34,text:"Duduk diam di sudut kamar,"},{time:12.18,text:"Buku terbuka tapi pikiran liar."},{time:17.76,text:"Cita-cita tinggi melangit,"},{time:23.27,text:"Tapi tangan malas untuk bangkit."},{time:30.49,text:"Orang bilang aku pemimpi,"},{time:34.64,text:"Terlalu banyak tidur di siang hari."},{time:39.78,text:"Tapi dalam hati ku tahu pasti,"},{time:44.39,text:"Ada jalan untuk jadi berarti."},{time:49.94,text:"Tak cepat, tak langsung terbang tinggi,"},{time:54.62,text:"Jalan lambat pun bisa berarti."},{time:59.25,text:"Waktu berjalan, aku mulai sadar,"},{time:63.81,text:"Impian itu harus dikejar."},{time:68.28,text:"Kini aku berdiri di puncak dunia,"},{time:73.10,text:"Dulu dihina, kini dipercaya."},{time:77.75,text:"Langkahku lambat tapi tak pernah mundur,"},{time:83.27,text:"Mimpi yang tertunda kini pun jujur."},{time:89.58,text:"Hari-hari penuh alasan,"},{time:93.86,text:"Tapi malam penuh harapan."},{time:99.15,text:"Layar penuh rencana palsu,"},{time:103.95,text:"Tapi hati tetap tak mau jemu."},{time:109.34,text:"Aku tahu aku harus berubah,"},{time:113.56,text:"Walau malas sering buat resah."},{time:118.46,text:"Sedikit demi sedikit ku coba,"},{time:123.39,text:"Hingga langkah kecil jadi nyata."},{time:128.82,text:"Tak cepat, tak langsung terbang tinggi,"},{time:133.20,text:"Jalan lambat pun bisa berarti."},{time:140.49,text:"Waktu berjalan, aku mulai sadar,"},{time:143.62,text:"Impian itu harus dikejar."},{time:147.66,text:"Kini aku berdiri di puncak dunia,"},{time:152.72,text:"Dulu dihina, kini dipercaya."},{time:157.71,text:"Langkahku lambat tapi tak pernah mundur,"},{time:162.53,text:"Mimpi yang tertunda kini pun jujur."},{time:168.89,text:"Bukan soal seberapa cepat,"},{time:173.50,text:"Tapi seberapa kuat niat."},{time:178.41,text:"Masa lalu bukan penentu,"},{time:182.76,text:"Karena masa depan milik yang mau."},{time:189.67,text:"Kini aku berdiri di puncak dunia,"},{time:194.58,text:"Bukan karena cepat, tapi karena percaya."},{time:200.43,text:"Langkahku lambat tapi tak pernah luntur,"},{time:204.96,text:"Mimpi yang tertunda akhirnya jujur."}],
-    "Langit Masih Sama":[{time:8.21,text:"Pagi datang tanpa warna"},{time:14.80,text:"Langkahku berat hati terluka"},{time:19.69,text:"Tapi aku tahu waktu takkan tunggu"},{time:24.95,text:"Harus bangkit walau masih ragu"},{time:29.63,text:"Setiap luka ada akhirnya"},{time:34.54,text:"Setiap gelap pasti ada cahaya"},{time:39.12,text:"Langit masih sama biru di atas sana"},{time:44.65,text:"Meski badai sempat butakan mata"},{time:48.47,text:"Aku percaya masih ada cahaya"},{time:55.15,text:"Di balik semua air mata"},{time:69.73,text:"Jejak mimpi yang sempat hilang"},{time:74.65,text:"Kupungut satu-satu dengan tenang"},{time:79.74,text:"Tak semua indah tapi semua nyata"},{time:84.75,text:"Hidup bukan tentang menyerah"},{time:89.48,text:"Karena hati tak dicipta untuk padam"},{time:94.78,text:"Walau ribuan kali jatuh tenggelam"},{time:99.11,text:"Langit masih sama biru di atas sana"},{time:104.01,text:"Meski badai sempat butakan mata"},{time:109.26,text:"Aku percaya masih ada cahaya"},{time:115.32,text:"Di balik semua air mata"},{time:119.92,text:"Saat kau pikir semua terlambat"},{time:124.74,text:"Ingat mentari tak pernah ingkar tempat"},{time:129.50,text:"Hari ini mungkin tak sempurna"},{time:134.67,text:"Tapi esok bisa jadi cerita"},{time:139.31,text:"Langit masih sama biru di atas sana"},{time:144.40,text:"Dan kini ku tahu ku tak sendiri"},{time:149.40,text:"Aku percaya masih ada cahaya"},{time:154.70,text:"Yang menuntunku kembali"}],
-    "Suatu Hari Nanti":[{time:12.87,text:"Di sudut kecil kota yang tenang"},{time:18.70,text:"Aku duduk bermimpi tentang lintasan panjang"},{time:25.18,text:"Tak ada sorak tak ada gemerlap"},{time:31.23,text:"Hanya tekad di dada yang tak pernah lenyap"},{time:36.95,text:"Tak semua orang bisa mengerti"},{time:43.07,text:"Langkah kecil yang kuambil setiap hari"},{time:48.95,text:"Tapi aku tahu dalam hati"},{time:55.15,text:"Setiap peluh ini punya arti"},{time:61.03,text:"Suatu hari nanti aku melaju"},{time:67.34,text:"Melewati badai, luka dan ragu"},{time:73.94,text:"Suatu hari nanti ku buktikan"},{time:78.64,text:"Bahwa mimpi tak pernah jadi angan-angan"},{time:95.95,text:"Kadang dunia terasa berat"},{time:101.57,text:"Langkah tertahan harapan nyaris tersesat"},{time:107.88,text:"Tapi aku belajar dari kesakitan"},{time:114.05,text:"Bahwa jatuh bukan akhir perjalanan"},{time:120.23,text:"Dari malam-malam panjang yang sunyi"},{time:125.52,text:"Dari tangis yang tak pernah terlihat di sini"},{time:132.05,text:"Kupahat impian di dinding hati"},{time:138.49,text:"Dan ku bawa sampai akhir nanti"},{time:144.48,text:"Suatu hari nanti aku melaju"},{time:150.54,text:"Bukan hanya cepat tapi penuh makna"},{time:155.61,text:"Suatu hari nanti dunia tahu"},{time:162.40,text:"Ada harga dari tiap jejak yang kutuju"},{time:169.05,text:"Aku bermimpi"},{time:172.19,text:"Menjadi juara dunia"},{time:175.51,text:"Bukan sekadar piala"},{time:178.29,text:"Tapi juara dari segala luka dan usaha"},{time:184.09,text:"Suatu hari nanti, ku tak sendiri"},{time:189.31,text:"Orang-orang yang kusayang ikut berdiri"},{time:195.56,text:"Suatu hari nanti, semua ini"},{time:202.84,text:"Jadi cerita tentang gigih yang tak pernah mati"}],
-    "Nada Terpendam":[{time:15.20,text:"Di balik senyum tersimpan"},{time:21.62,text:"Sebuah lagu yang tak pernah dinyanyikan"},{time:28.43,text:"Nada-nada yang kusimpan"},{time:34.10,text:"Dalam sunyi yang terus menjerat"},{time:40.64,text:"Kata ingin keluar tapi takut terdengar"},{time:44.08,text:"Takut dihancurkan oleh waktu yang salah"},{time:47.16,text:"Jadi kupendam dalam ruang"},{time:50.46,text:"Yang hanya aku dan sepi yang tahu"},{time:55.32,text:"Kupeluk luka dalam diam"},{time:59.85,text:"Menunggu hari yang paham"},{time:66.33,text:"Andai kau tahu lagu di hatiku"},{time:72.93,text:"Yang tak pernah punya panggung untuk tumbuh"},{time:79.60,text:"Di setiap helaan napas yang tertahan"},{time:86.42,text:"Nada terpendam nyanyian yang tertelan"},{time:97.44,text:"Kadang ingin aku teriak"},{time:104.18,text:"Tapi dunia sibuk dengan suaranya"},{time:110.44,text:"Tak ada ruang tuk bisikanku"},{time:116.38,text:"Yang perlahan hilang jadi abu"},{time:122.86,text:"Kupeluk mimpi yang tak terang"},{time:129.00,text:"Masih berharap kau datang"},{time:135.75,text:"Andai kau tahu lagu di hatiku"},{time:141.99,text:"Yang tak pernah punya panggung untuk tumbuh"},{time:148.37,text:"Di setiap helaan napas yang tertahan"},{time:155.20,text:"Nada terpendam nyanyian yang tertelan"},{time:160.65,text:"Mungkin suatu hari nanti"},{time:163.18,text:"Ada telinga yang mau mengerti"},{time:165.82,text:"Tapi sampai saat itu tiba"},{time:169.12,text:"Biar kusimpan lagu ini"},{time:175.24,text:"Andai kau tahu betapa ku ingin"},{time:181.39,text:"Menyanyikan semua yang terkunci"},{time:188.11,text:"Namun bibirku masih terkunci oleh sunyi"},{time:194.54,text:"Nada terpendam, tetap menanti"},{time:202.78,text:"Di balik senyum, tersimpan"},{time:208.28,text:"Lagu yang tak pernah dinyanyikan"}],
-    "Langit Patah Arah":[{time:10.88,text:"Langit pun salah menatap"},{time:15.00,text:"Seperti aku, tak tahu harus ke mana"},{time:22.09,text:"Senja tak lagi jingga"},{time:25.50,text:"Waktu pun enggan bicara"},{time:33.50,text:"Langkahku kabur di bayang"},{time:37.68,text:"Arah hilang, peta pun tenggelam"},{time:44.78,text:"Kupanggil namaku sendiri"},{time:47.93,text:"Tak ada gema, hanya sepi"},{time:52.18,text:"Langit patah arah"},{time:56.10,text:"Tak tahu barat dari timur"},{time:61.52,text:"Seperti hati yang retak"},{time:64.86,text:"Dalam kabut rindu yang hancur"},{time:69.05,text:"Langit patah arah"},{time:73.01,text:"Tak bisa bedakan pagi atau petang"},{time:78.61,text:"Seperti aku yang hilang"},{time:82.88,text:"Tak temukan pulang"},{time:86.22,text:"Mungkin waktu perlu diam"},{time:91.75,text:"Untuk dengar suara dalam"},{time:97.45,text:"Mungkin aku perlu hilang"},{time:101.50,text:"Agar tahu di mana terang"},{time:107.29,text:"Langit patah arah"},{time:111.14,text:"Tak tahu barat dari timur"},{time:116.64,text:"Seperti hati yang retak"},{time:119.78,text:"Dalam kabut rindu yang hancur"},{time:124.67,text:"Langit patah arah"},{time:127.20,text:"Tak bisa bedakan pagi atau petang"},{time:133.52,text:"Seperti aku yang hilang"},{time:137.80,text:"Tak temukan pulang"},{time:150.71,text:"Langit pun salah menatap"},{time:154.98,text:"Dan aku masih... tak tahu harus ke mana"}],
-    "Tak Bernama, Tapi Ada":[{time:0.99,text:"Aku tak dikenal oleh dunia"},{time:2.75,text:"Tak tercatat dalam sejarah siapa-siapa"},{time:5.72,text:"Tapi aku pernah menolong tanpa disadari"},{time:8.68,text:"Langkahku sunyi tapi tetap berarti"},{time:12.26,text:"Kau tak pernah lihat aku"},{time:14.71,text:"Tapi aku selalu ada di balik bayangmu"},{time:23.66,text:"Tak bernama tapi aku ada"},{time:26.45,text:"Dalam tawa yang kau rasa"},{time:29.32,text:"Tak tertulis tapi nyata"},{time:31.95,text:"Di tiap detak yang buatmu percaya"},{time:36.50,text:"Aku bayang dalam keramaian"},{time:38.04,text:"Senyum yang singgah tanpa kau tahu siapa"},{time:40.59,text:"Mungkin kau lupa atau tak pernah sadar"},{time:43.01,text:"Ada aku di balik hari yang lebih sabar"},{time:46.86,text:"Aku bukan siapa-siapa"},{time:49.80,text:"Tapi aku pernah jadi alasmu berdiri"},{time:52.93,text:"Tak bernama tapi aku ada"},{time:55.55,text:"Dalam tawa yang kau rasa"},{time:58.39,text:"Tak tertulis tapi nyata"},{time:61.28,text:"Tapi tiap detak yang buatmu percaya"},{time:71.18,text:"Aku bukan siapa-siapa"},{time:73.37,text:"Tapi aku pernah jadi alasmu berdiri"},{time:76.51,text:"Tak bernama tapi aku ada"},{time:79.50,text:"Dalam hangat yang kau kira fana"},{time:82.74,text:"Tak terlihat tapi terasa"},{time:85.30,text:"Seperti suara saat kau diam"},{time:101.23,text:"Bukan pujian yang kucari"},{time:102.50,text:"Cukup kau berjalan lagi"},{time:106.53,text:"Tak bernama tapi aku ada"},{time:109.08,text:"Dalam luka yang perlahan reda"},{time:111.89,text:"Tak tertulis tapi nyata"},{time:114.97,text:"Seperti angin yang buatmu bertahan"},{time:118.41,text:"Mungkin aku akan dilupa"},{time:121.00,text:"Tapi jejakku tetap ada"},{time:123.70,text:"Tak bernama tapi aku ada"},{time:136.97,text:"Aku tak dikenal oleh dunia"},{time:139.11,text:"Yang singkat tanpa kau tau siapa"},{time:141.46,text:"Mungkin kau lupa atau tak pernah sadar"},{time:144.00,text:"Ada aku di balik hari yang lebih sabar"},{time:148.10,text:"Aku bayang dalam keramaian"},{time:150.34,text:"Senyum yang singgah tanpa kau tahu siapa"},{time:152.55,text:"Mungkin kau lupa atau tak pernah sadar"},{time:155.26,text:"Ada aku di balik hari yang lebih sabar"},{time:159.08,text:"Aku tak dikenal oleh dunia"},{time:162.44,text:"Yang tercatat dalam sejarah siapa-siapa"},{time:164.81,text:"Tapi aku pernah menolong tanpa sadar"},{time:167.65,text:"Ada aku dihari yang lebih sabar"},{time:171.84,text:"Aku bukan siapa-siapa"},{time:174.49,text:"Tapi aku pernah jadi alasmu berdiri"},{time:177.33,text:"Bukan ujian yang ku cari"},{time:179.38,text:"Cukup kau berjalan lagi"},{time:184.64,text:"Bukan ujian yang ku cari"},{time:186.15,text:"Cukup kau berjalan lagi"}],
-    "Resonansi Dalam Diam":[{time:14.75,text:"Dalam sunyi aku berbicara"},{time:18.42,text:"Tanpa kata, tanpa suara"},{time:21.94,text:"Setiap jeda penuh makna"},{time:25.34,text:"Yang tak sempat terucap nyata"},{time:29.35,text:"Mereka bilang aku diam"},{time:32.61,text:"Padahal hatiku bergemuruh"},{time:36.33,text:"Bukan bisu, hanya tenggelam"},{time:40.10,text:"Dalam dunia yang terlalu gaduh"},{time:45.87,text:"Diamku bukan hampa"},{time:49.86,text:"Tapi gema yang tak kau dengar"},{time:53.08,text:"Detak jantung, hembus napas"},{time:56.79,text:"Nada yang tak pernah lepas"},{time:60.49,text:"Diamku bukan akhir"},{time:63.79,text:"Tapi awal yang lebih dalam"},{time:67.90,text:"Resonansi dalam diam"},{time:71.35,text:"Menembus ruang dan waktu diam-diam"},{time:90.46,text:"Bayang-bayang menari perlahan"},{time:93.40,text:"Di ruang kosong penuh kenangan"},{time:96.95,text:"Kutatap langit tanpa warna"},{time:100.27,text:"Mencari arti dalam gelap yang bicara"},{time:106.09,text:"Tak perlu teriak tuk mengguncang"},{time:109.63,text:"Kadang senyap lebih menyentuh"},{time:112.87,text:"Tanpa ada ini"},{time:115.38,text:"Kau takkan tahu artinya peluk tanpa peluh"},{time:123.51,text:"Diamku bukan hampa"},{time:127.58,text:"Tapi gema yang tak kau dengar"},{time:130.91,text:"Detak jantung, hembus napas"},{time:134.44,text:"Nada yang tak pernah lepas"},{time:138.10,text:"Diamku bukan akhir"},{time:141.71,text:"Tapi awal yang lebih dalam"},{time:145.45,text:"Resonansi dalam diam"},{time:148.98,text:"Menembus ruang dan waktu diam-diam"},{time:154.86,text:"Cobalah dengar"},{time:159.03,text:"Bila hatimu masih peka"},{time:162.32,text:"Diam ini bicara"},{time:166.24,text:"Dengan cara yang tak biasa"},{time:184.25,text:"Diamku bukan hampa"},{time:188.63,text:"Tapi kemayang tak kau dengar"},{time:191.66,text:"Detak jantung hembus napas"},{time:195.72,text:"Nada yang tak pernah lepas"},{time:215.02,text:"Cobalah dengar"},{time:218.70,text:"Bila hatimu masih peka"},{time:222.43,text:"Diam ini bicara"},{time:225.70,text:"Dengan cara yang tak biasa"}],
-    "Runtuh Tanpa Suara":[{time:0.00,text:"Langit kelabu di dalam dadaku"},{time:5.63,text:"Langkahku berat tapi kau tak tahu"},{time:11.67,text:"Aku tersenyum di depanmu"},{time:18.32,text:"Padahal hatiku nyaris membeku"},{time:24.66,text:"Kau berjalan tanpa menoleh"},{time:29.72,text:"Aku tenggelam dalam bayangmu"},{time:37.31,text:"Dan dunia tetap berputar"},{time:41.61,text:"Meski aku tak lagi utuh"},{time:48.17,text:"Bahkan tangisku terlalu lirih"},{time:54.22,text:"Untuk mengguncang perhatianmu"},{time:60.15,text:"Aku runtuh tanpa suara"},{time:64.08,text:"Di titik terendah kau tak melihatku"},{time:72.28,text:"Cinta ini jadi rahasia"},{time:80.63,text:"Yang hanya aku dan malam tahu"},{time:88.22,text:"Kau tertawa aku ikut tertawa"},{time:91.68,text:"Padahal jiwaku sedang patah"},{time:94.73,text:"Kau bahagia aku pura-pura"},{time:97.33,text:"Menjadi kuat meski tak kuasa"},{time:101.03,text:"Andai kau tahu betapa aku"},{time:103.73,text:"Menunggu satu tatapan darimu"},{time:106.72,text:"Tapi aku hanyalah bayangan"},{time:109.82,text:"Yang kau lewati tanpa perasaan"},{time:116.87,text:"Bahkan tangisku terlalu lirih"},{time:123.16,text:"Untuk mengguncang perhatianmu"},{time:129.01,text:"Aku runtuh tanpa suara"},{time:132.53,text:"Di titik terendah kau tak melihatku"},{time:141.32,text:"Cinta ini jadi rahasia"},{time:148.78,text:"Yang hanya aku dan malam tahu"},{time:155.11,text:"Dan mungkin, selamanya begitu"},{time:160.65,text:"Aku runtuh"},{time:166.89,text:"Tanpa suara"}],
-    "Kilau Tanpa Sorotan":[{time:17.33,text:"Langkah kecil di jalan sepi"},{time:24.24,text:"Tak ada sorot tak ada tepuk tangan"},{time:32.04,text:"Namun hatiku tetap bernyanyi"},{time:38.02,text:"Kilauku tak butuh panggung besar"},{time:45.83,text:"Kilau tanpa sorotan"},{time:53.64,text:"Tetap hidup dalam diam"},{time:61.09,text:"Resonansi yang perlahan"},{time:67.14,text:"Mengalun di ruang tenang"},{time:76.23,text:"Bayangan jatuh cahaya redup"},{time:83.84,text:"Aku masih berdiri tak perlu bukti"},{time:91.08,text:"Dalam senyap aku menemukan"},{time:97.06,text:"Arti hadir tanpa keramaian"},{time:104.87,text:"Kilau tanpa sorotan"},{time:112.93,text:"Tetap hidup dalam diam"},{time:120.17,text:"Resonansi yang perlahan"},{time:126.20,text:"Mengalun di ruang tenang"},{time:161.20,text:"Tak semua harus terlihat"},{time:168.64,text:"Tak semua harus terdengar"},{time:175.96,text:"Ada indah yang sederhana"},{time:181.54,text:"Ada damai tanpa suara"},{time:189.19,text:"Kilauku tetap ada"},{time:198.21,text:"Meski tanpa sorotan"},{time:205.07,text:"Resonansi dalam diam"},{time:211.29,text:"Mengikat jiwa perlahan"}],
-    "Gelombang Terakhir":[{time:13.59,text:"Di tepi senja aku menunggu"},{time:19.11,text:"Gelombang terakhir datang membisu"},{time:24.89,text:"Angin berbisik waktu pun layu"},{time:30.49,text:"Nada sederhana hati pun luluh"},{time:34.61,text:"Gelombang terakhir bawa aku pergi"},{time:40.52,text:"Temani langkah temani mimpi"},{time:46.30,text:"Kita hanyut tanpa janji lagi"},{time:51.10,text:"Gelombang terakhir aku percaya diri"},{time:62.43,text:"Langkah kecil di pasir yang hilang"},{time:68.23,text:"Jejakmu samar tapi tetap tenang"},{time:73.96,text:"Cahaya redup tak perlu terang"},{time:79.72,text:"Ritme sederhana rasa pun datang"},{time:83.86,text:"Gelombang terakhir bawa aku pergi"},{time:89.75,text:"Temani langkah temani mimpi"},{time:95.61,text:"Kita hanyut tanpa janji lagi"},{time:101.18,text:"Gelombang terakhir aku percaya diri"},{time:108.99,text:"Tak ada kata hanya rasa"},{time:114.56,text:"Mengalir pelan seperti nada"},{time:120.25,text:"Gelombang terakhir aku percaya"},{time:124.85,text:"Diam pun bisa jadi suara"},{time:132.35,text:"Gelombang terakhir"}]
-  };
+/* ═══ LYRICS ═══ */
+const lyrics={
+"Lintasan Tak Bermakna":[{t:25.13,x:"Di garis start nyali pun bicara,"},{t:29.63,x:"Mesin menderu bak suara raja."},{t:32.98,x:"Asap naik, waktu pun lenyap,"},{t:36.22,x:"Tiap tikungan, mimpi pun tajam."},{t:38.89,x:"Tak ada ragu dalam kecepatan,"},{t:41.45,x:"Lintasan adalah medan keberanian."},{t:45.00,x:"Ban berteriak dalam keyakinan,"},{t:47.76,x:"Menuju juara, penuh pengorbanan."},{t:58.29,x:"Detik berdetak di balik helm,"},{t:61.19,x:"Fokus tajam, pikiran diam."},{t:64.40,x:"Satu peluang di ujung tikungan,"},{t:67.72,x:"Sekali salah, habis harapan."},{t:70.83,x:"Di balik visor, mimpi menyala,"},{t:73.74,x:"Dibakar semangat, dinginkan raga."},{t:76.86,x:"Gas ditekan, batas dilawan,"},{t:80.23,x:"Di jalur ini, hanya pemenang bertahan."},{t:84.35,x:"Semua sepi saat melaju,"},{t:86.79,x:"Hanya angin yang tahu arahmu."},{t:89.59,x:"Keringat jatuh, hati membara,"},{t:93.10,x:"Ini bukan sekadar lomba."},{t:103.01,x:"Taklukan keraguan di tikungan tajam,"},{t:106.73,x:"Jiwa pembalap tak pernah padam."},{t:109.13,x:"Terjatuh? Bangkit! Jangan bertanya,"},{t:112.39,x:"Karena lintasan tak beri jeda."},{t:116.61,x:"Di atas aspal, cerita ditulis,"},{t:118.65,x:"Dengan kecepatan yang tak bisa ditangkap garis."},{t:121.98,x:"Gaspol! Taklukkan lintasan jadilah juara!"},{t:141.61,x:"Berdetak dibalik helm"},{t:144.72,x:"Fokus tajam, pikiran diam."},{t:147.88,x:"Satu peluang di ujung tikungan,"},{t:150.69,x:"Sekali salah, habis harapan."},{t:154.33,x:"Di balik visor, mimpi menyala,"},{t:156.90,x:"Dibakar semangat, dinginkan raga."},{t:159.99,x:"Gas ditekan, batas dilawan,"},{t:163.30,x:"Di jalur ini, hanya pemenang bertahan."},{t:167.28,x:"Semua sepi saat melaju,"},{t:169.93,x:"Hanya angin yang tahu arahmu."},{t:172.88,x:"Keringat jatuh, hati membara,"},{t:176.29,x:"Ini bukan sekadar lomba."},{t:179.73,x:"Taklukan keraguan di tikungan tajam,"},{t:182.66,x:"Jiwa pembalap tak pernah padam."},{t:186.05,x:"Terjatuh? Bangkit! Jangan bertanya,"},{t:189.00,x:"Karena lintasan tak beri jeda."},{t:192.47,x:"Di atas aspal, cerita ditulis,"},{t:194.77,x:"Dengan kecepatan yang tak bisa ditangkap garis."},{t:198.17,x:"Gaspol! Taklukkan lintasan jadilah juara!"}],
+"Padahal Sudah Bilang":[{t:11.26,x:"Hari itu aku tak di kelas"},{t:16.62,x:"Tapi pesanku sudah sampai jelas"},{t:21.59,x:"Kuketik pelan, kuhormat seperti biasa"},{t:27.17,x:"Kirim ke wali kupikir itu cukup"},{t:33.75,x:"Tapi paginya, kulihat lembar absen"},{t:38.68,x:"Namaku hilang, tak ada keterangan"},{t:45.70,x:"Padahal sudah bilang"},{t:49.60,x:"Kusampaikan baik pada yang berwenang"},{t:54.75,x:"Tak perlu teriak, tak kurang sopan"},{t:60.74,x:"Tapi tetap saja dianggap hilang"},{t:66.86,x:"Padahal aku cuma ingin dimengerti"},{t:78.39,x:"Katanya semua punya hak bicara"},{t:82.75,x:"Tapi mengapa yang pelan tak didengar juga?"},{t:88.79,x:"Kubiarkan kepala menunduk diam"},{t:94.16,x:"Karena kata-kataku dianggap tak sampai malam"},{t:100.16,x:"Mungkin pesan itu terlewat"},{t:104.84,x:"Atau mungkin… sengaja tak dilihat"},{t:112.53,x:"Padahal sudah bilang"},{t:116.62,x:"Kujalankan aturan seperti yang diajar"},{t:122.43,x:"Tapi tetap ditulis tanpa kabar"},{t:127.98,x:"Seolah tak pernah ada niat benar"},{t:133.79,x:"Padahal aku hanya ingin dihargai"},{t:140.22,x:"(Suara pelan bukan berarti salah)"},{t:142.65,x:"(Diam bukan berarti tak usaha)"},{t:145.30,x:"(Kalau pun salahku tak cukup keras)"},{t:148.01,x:"(Mengapa kebenaran tak diberi tempat?)"},{t:154.30,x:"Padahal sudah bilang"},{t:158.84,x:"Kepada yang seharusnya mencatat"},{t:165.82,x:"Tapi tetap tertulis aku tak hadir"},{t:169.80,x:"Seolah aku menghilang tanpa jejak"},{t:175.76,x:"Padahal aku… selalu mencoba jujur"},{t:181.38,x:"Besok-besok, mungkin aku benar-benar diam"},{t:184.21,x:"Biar mereka tulis saja, tanpa keterangan"}],
+"Mimpi yang Tertunda":[{t:8.34,x:"Duduk diam di sudut kamar,"},{t:12.18,x:"Buku terbuka tapi pikiran liar."},{t:17.76,x:"Cita-cita tinggi melangit,"},{t:23.27,x:"Tapi tangan malas untuk bangkit."},{t:30.49,x:"Orang bilang aku pemimpi,"},{t:34.64,x:"Terlalu banyak tidur di siang hari."},{t:39.78,x:"Tapi dalam hati ku tahu pasti,"},{t:44.39,x:"Ada jalan untuk jadi berarti."},{t:49.94,x:"Tak cepat, tak langsung terbang tinggi,"},{t:54.62,x:"Jalan lambat pun bisa berarti."},{t:59.25,x:"Waktu berjalan, aku mulai sadar,"},{t:63.81,x:"Impian itu harus dikejar."},{t:68.28,x:"Kini aku berdiri di puncak dunia,"},{t:73.10,x:"Dulu dihina, kini dipercaya."},{t:77.75,x:"Langkahku lambat tapi tak pernah mundur,"},{t:83.27,x:"Mimpi yang tertunda kini pun jujur."},{t:89.58,x:"Hari-hari penuh alasan,"},{t:93.86,x:"Tapi malam penuh harapan."},{t:99.15,x:"Layar penuh rencana palsu,"},{t:103.95,x:"Tapi hati tetap tak mau jemu."},{t:109.34,x:"Aku tahu aku harus berubah,"},{t:113.56,x:"Walau malas sering buat resah."},{t:118.46,x:"Sedikit demi sedikit ku coba,"},{t:123.39,x:"Hingga langkah kecil jadi nyata."},{t:128.82,x:"Tak cepat, tak langsung terbang tinggi,"},{t:133.20,x:"Jalan lambat pun bisa berarti."},{t:140.49,x:"Waktu berjalan, aku mulai sadar,"},{t:143.62,x:"Impian itu harus dikejar."},{t:147.66,x:"Kini aku berdiri di puncak dunia,"},{t:152.72,x:"Dulu dihina, kini dipercaya."},{t:157.71,x:"Langkahku lambat tapi tak pernah mundur,"},{t:162.53,x:"Mimpi yang tertunda kini pun jujur."},{t:168.89,x:"Bukan soal seberapa cepat,"},{t:173.50,x:"Tapi seberapa kuat niat."},{t:178.41,x:"Masa lalu bukan penentu,"},{t:182.76,x:"Karena masa depan milik yang mau."},{t:189.67,x:"Kini aku berdiri di puncak dunia,"},{t:194.58,x:"Bukan karena cepat, tapi karena percaya."},{t:200.43,x:"Langkahku lambat tapi tak pernah luntur,"},{t:204.96,x:"Mimpi yang tertunda akhirnya jujur."}],
+"Langit Masih Sama":[{t:8.21,x:"Pagi datang tanpa warna"},{t:14.80,x:"Langkahku berat hati terluka"},{t:19.69,x:"Tapi aku tahu waktu takkan tunggu"},{t:24.95,x:"Harus bangkit walau masih ragu"},{t:29.63,x:"Setiap luka ada akhirnya"},{t:34.54,x:"Setiap gelap pasti ada cahaya"},{t:39.12,x:"Langit masih sama biru di atas sana"},{t:44.65,x:"Meski badai sempat butakan mata"},{t:48.47,x:"Aku percaya masih ada cahaya"},{t:55.15,x:"Di balik semua air mata"},{t:69.73,x:"Jejak mimpi yang sempat hilang"},{t:74.65,x:"Kupungut satu-satu dengan tenang"},{t:79.74,x:"Tak semua indah tapi semua nyata"},{t:84.75,x:"Hidup bukan tentang menyerah"},{t:89.48,x:"Karena hati tak dicipta untuk padam"},{t:94.78,x:"Walau ribuan kali jatuh tenggelam"},{t:99.11,x:"Langit masih sama biru di atas sana"},{t:104.01,x:"Meski badai sempat butakan mata"},{t:109.26,x:"Aku percaya masih ada cahaya"},{t:115.32,x:"Di balik semua air mata"},{t:119.92,x:"Saat kau pikir semua terlambat"},{t:124.74,x:"Ingat mentari tak pernah ingkar tempat"},{t:129.50,x:"Hari ini mungkin tak sempurna"},{t:134.67,x:"Tapi esok bisa jadi cerita"},{t:139.31,x:"Langit masih sama biru di atas sana"},{t:144.40,x:"Dan kini ku tahu ku tak sendiri"},{t:149.40,x:"Aku percaya masih ada cahaya"},{t:154.70,x:"Yang menuntunku kembali"}],
+"Suatu Hari Nanti":[{t:12.87,x:"Di sudut kecil kota yang tenang"},{t:18.70,x:"Aku duduk bermimpi tentang lintasan panjang"},{t:25.18,x:"Tak ada sorak tak ada gemerlap"},{t:31.23,x:"Hanya tekad di dada yang tak pernah lenyap"},{t:36.95,x:"Tak semua orang bisa mengerti"},{t:43.07,x:"Langkah kecil yang kuambil setiap hari"},{t:48.95,x:"Tapi aku tahu dalam hati"},{t:55.15,x:"Setiap peluh ini punya arti"},{t:61.03,x:"Suatu hari nanti aku melaju"},{t:67.34,x:"Melewati badai, luka dan ragu"},{t:73.94,x:"Suatu hari nanti ku buktikan"},{t:78.64,x:"Bahwa mimpi tak pernah jadi angan-angan"},{t:95.95,x:"Kadang dunia terasa berat"},{t:101.57,x:"Langkah tertahan harapan nyaris tersesat"},{t:107.88,x:"Tapi aku belajar dari kesakitan"},{t:114.05,x:"Bahwa jatuh bukan akhir perjalanan"},{t:120.23,x:"Dari malam-malam panjang yang sunyi"},{t:125.52,x:"Dari tangis yang tak pernah terlihat di sini"},{t:132.05,x:"Kupahat impian di dinding hati"},{t:138.49,x:"Dan ku bawa sampai akhir nanti"},{t:144.48,x:"Suatu hari nanti aku melaju"},{t:150.54,x:"Bukan hanya cepat tapi penuh makna"},{t:155.61,x:"Suatu hari nanti dunia tahu"},{t:162.40,x:"Ada harga dari tiap jejak yang kutuju"},{t:169.05,x:"Aku bermimpi"},{t:172.19,x:"Menjadi juara dunia"},{t:175.51,x:"Bukan sekadar piala"},{t:178.29,x:"Tapi juara dari segala luka dan usaha"},{t:184.09,x:"Suatu hari nanti, ku tak sendiri"},{t:189.31,x:"Orang-orang yang kusayang ikut berdiri"},{t:195.56,x:"Suatu hari nanti, semua ini"},{t:202.84,x:"Jadi cerita tentang gigih yang tak pernah mati"}],
+"Nada Terpendam":[{t:15.20,x:"Di balik senyum tersimpan"},{t:21.62,x:"Sebuah lagu yang tak pernah dinyanyikan"},{t:28.43,x:"Nada-nada yang kusimpan"},{t:34.10,x:"Dalam sunyi yang terus menjerat"},{t:40.64,x:"Kata ingin keluar tapi takut terdengar"},{t:44.08,x:"Takut dihancurkan oleh waktu yang salah"},{t:47.16,x:"Jadi kupendam dalam ruang"},{t:50.46,x:"Yang hanya aku dan sepi yang tahu"},{t:55.32,x:"Kupeluk luka dalam diam"},{t:59.85,x:"Menunggu hari yang paham"},{t:66.33,x:"Andai kau tahu lagu di hatiku"},{t:72.93,x:"Yang tak pernah punya panggung untuk tumbuh"},{t:79.60,x:"Di setiap helaan napas yang tertahan"},{t:86.42,x:"Nada terpendam nyanyian yang tertelan"},{t:97.44,x:"Kadang ingin aku teriak"},{t:104.18,x:"Tapi dunia sibuk dengan suaranya"},{t:110.44,x:"Tak ada ruang tuk bisikanku"},{t:116.38,x:"Yang perlahan hilang jadi abu"},{t:122.86,x:"Kupeluk mimpi yang tak terang"},{t:129.00,x:"Masih berharap kau datang"},{t:135.75,x:"Andai kau tahu lagu di hatiku"},{t:141.99,x:"Yang tak pernah punya panggung untuk tumbuh"},{t:148.37,x:"Di setiap helaan napas yang tertahan"},{t:155.20,x:"Nada terpendam nyanyian yang tertelan"},{t:160.65,x:"Mungkin suatu hari nanti"},{t:163.18,x:"Ada telinga yang mau mengerti"},{t:165.82,x:"Tapi sampai saat itu tiba"},{t:169.12,x:"Biar kusimpan lagu ini"},{t:175.24,x:"Andai kau tahu betapa ku ingin"},{t:181.39,x:"Menyanyikan semua yang terkunci"},{t:188.11,x:"Namun bibirku masih terkunci oleh sunyi"},{t:194.54,x:"Nada terpendam, tetap menanti"},{t:202.78,x:"Di balik senyum, tersimpan"},{t:208.28,x:"Lagu yang tak pernah dinyanyikan"}],
+"Langit Patah Arah":[{t:10.88,x:"Langit pun salah menatap"},{t:15.00,x:"Seperti aku, tak tahu harus ke mana"},{t:22.09,x:"Senja tak lagi jingga"},{t:25.50,x:"Waktu pun enggan bicara"},{t:33.50,x:"Langkahku kabur di bayang"},{t:37.68,x:"Arah hilang, peta pun tenggelam"},{t:44.78,x:"Kupanggil namaku sendiri"},{t:47.93,x:"Tak ada gema, hanya sepi"},{t:52.18,x:"Langit patah arah"},{t:56.10,x:"Tak tahu barat dari timur"},{t:61.52,x:"Seperti hati yang retak"},{t:64.86,x:"Dalam kabut rindu yang hancur"},{t:69.05,x:"Langit patah arah"},{t:73.01,x:"Tak bisa bedakan pagi atau petang"},{t:78.61,x:"Seperti aku yang hilang"},{t:82.88,x:"Tak temukan pulang"},{t:86.22,x:"Mungkin waktu perlu diam"},{t:91.75,x:"Untuk dengar suara dalam"},{t:97.45,x:"Mungkin aku perlu hilang"},{t:101.50,x:"Agar tahu di mana terang"},{t:107.29,x:"Langit patah arah"},{t:111.14,x:"Tak tahu barat dari timur"},{t:116.64,x:"Seperti hati yang retak"},{t:119.78,x:"Dalam kabut rindu yang hancur"},{t:124.67,x:"Langit patah arah"},{t:127.20,x:"Tak bisa bedakan pagi atau petang"},{t:133.52,x:"Seperti aku yang hilang"},{t:137.80,x:"Tak temukan pulang"},{t:150.71,x:"Langit pun salah menatap"},{t:154.98,x:"Dan aku masih... tak tahu harus ke mana"}],
+"Tak Bernama, Tapi Ada":[{t:0.99,x:"Aku tak dikenal oleh dunia"},{t:2.75,x:"Tak tercatat dalam sejarah siapa-siapa"},{t:5.72,x:"Tapi aku pernah menolong tanpa disadari"},{t:8.68,x:"Langkahku sunyi tapi tetap berarti"},{t:12.26,x:"Kau tak pernah lihat aku"},{t:14.71,x:"Tapi aku selalu ada di balik bayangmu"},{t:23.66,x:"Tak bernama tapi aku ada"},{t:26.45,x:"Dalam tawa yang kau rasa"},{t:29.32,x:"Tak tertulis tapi nyata"},{t:31.95,x:"Di tiap detak yang buatmu percaya"},{t:36.50,x:"Aku bayang dalam keramaian"},{t:38.04,x:"Senyum yang singgah tanpa kau tahu siapa"},{t:40.59,x:"Mungkin kau lupa atau tak pernah sadar"},{t:43.01,x:"Ada aku di balik hari yang lebih sabar"},{t:46.86,x:"Aku bukan siapa-siapa"},{t:49.80,x:"Tapi aku pernah jadi alasmu berdiri"},{t:52.93,x:"Tak bernama tapi aku ada"},{t:55.55,x:"Dalam tawa yang kau rasa"},{t:58.39,x:"Tak tertulis tapi nyata"},{t:61.28,x:"Tapi tiap detak yang buatmu percaya"},{t:71.18,x:"Aku bukan siapa-siapa"},{t:73.37,x:"Tapi aku pernah jadi alasmu berdiri"},{t:76.51,x:"Tak bernama tapi aku ada"},{t:79.50,x:"Dalam hangat yang kau kira fana"},{t:82.74,x:"Tak terlihat tapi terasa"},{t:85.30,x:"Seperti suara saat kau diam"},{t:101.23,x:"Bukan pujian yang kucari"},{t:102.50,x:"Cukup kau berjalan lagi"},{t:106.53,x:"Tak bernama tapi aku ada"},{t:109.08,x:"Dalam luka yang perlahan reda"},{t:111.89,x:"Tak tertulis tapi nyata"},{t:114.97,x:"Seperti angin yang buatmu bertahan"},{t:118.41,x:"Mungkin aku akan dilupa"},{t:121.00,x:"Tapi jejakku tetap ada"},{t:123.70,x:"Tak bernama tapi aku ada"},{t:136.97,x:"Aku tak dikenal oleh dunia"},{t:139.11,x:"Yang singkat tanpa kau tau siapa"},{t:141.46,x:"Mungkin kau lupa atau tak pernah sadar"},{t:144.00,x:"Ada aku di balik hari yang lebih sabar"},{t:148.10,x:"Aku bayang dalam keramaian"},{t:150.34,x:"Senyum yang singgah tanpa kau tahu siapa"},{t:152.55,x:"Mungkin kau lupa atau tak pernah sadar"},{t:155.26,x:"Ada aku di balik hari yang lebih sabar"},{t:159.08,x:"Aku tak dikenal oleh dunia"},{t:162.44,x:"Yang tercatat dalam sejarah siapa-siapa"},{t:164.81,x:"Tapi aku pernah menolong tanpa sadar"},{t:167.65,x:"Ada aku dihari yang lebih sabar"},{t:171.84,x:"Aku bukan siapa-siapa"},{t:174.49,x:"Tapi aku pernah jadi alasmu berdiri"},{t:177.33,x:"Bukan ujian yang ku cari"},{t:179.38,x:"Cukup kau berjalan lagi"},{t:184.64,x:"Bukan ujian yang ku cari"},{t:186.15,x:"Cukup kau berjalan lagi"}],
+"Resonansi Dalam Diam":[{t:14.75,x:"Dalam sunyi aku berbicara"},{t:18.42,x:"Tanpa kata, tanpa suara"},{t:21.94,x:"Setiap jeda penuh makna"},{t:25.34,x:"Yang tak sempat terucap nyata"},{t:29.35,x:"Mereka bilang aku diam"},{t:32.61,x:"Padahal hatiku bergemuruh"},{t:36.33,x:"Bukan bisu, hanya tenggelam"},{t:40.10,x:"Dalam dunia yang terlalu gaduh"},{t:45.87,x:"Diamku bukan hampa"},{t:49.86,x:"Tapi gema yang tak kau dengar"},{t:53.08,x:"Detak jantung, hembus napas"},{t:56.79,x:"Nada yang tak pernah lepas"},{t:60.49,x:"Diamku bukan akhir"},{t:63.79,x:"Tapi awal yang lebih dalam"},{t:67.90,x:"Resonansi dalam diam"},{t:71.35,x:"Menembus ruang dan waktu diam-diam"},{t:90.46,x:"Bayang-bayang menari perlahan"},{t:93.40,x:"Di ruang kosong penuh kenangan"},{t:96.95,x:"Kutatap langit tanpa warna"},{t:100.27,x:"Mencari arti dalam gelap yang bicara"},{t:106.09,x:"Tak perlu teriak tuk mengguncang"},{t:109.63,x:"Kadang senyap lebih menyentuh"},{t:112.87,x:"Tanpa ada ini"},{t:115.38,x:"Kau takkan tahu artinya peluk tanpa peluh"},{t:123.51,x:"Diamku bukan hampa"},{t:127.58,x:"Tapi gema yang tak kau dengar"},{t:130.91,x:"Detak jantung, hembus napas"},{t:134.44,x:"Nada yang tak pernah lepas"},{t:138.10,x:"Diamku bukan akhir"},{t:141.71,x:"Tapi awal yang lebih dalam"},{t:145.45,x:"Resonansi dalam diam"},{t:148.98,x:"Menembus ruang dan waktu diam-diam"},{t:154.86,x:"Cobalah dengar"},{t:159.03,x:"Bila hatimu masih peka"},{t:162.32,x:"Diam ini bicara"},{t:166.24,x:"Dengan cara yang tak biasa"},{t:184.25,x:"Diamku bukan hampa"},{t:188.63,x:"Tapi kemayang tak kau dengar"},{t:191.66,x:"Detak jantung hembus napas"},{t:195.72,x:"Nada yang tak pernah lepas"},{t:215.02,x:"Cobalah dengar"},{t:218.70,x:"Bila hatimu masih peka"},{t:222.43,x:"Diam ini bicara"},{t:225.70,x:"Dengan cara yang tak biasa"}],
+"Runtuh Tanpa Suara":[{t:0.00,x:"Langit kelabu di dalam dadaku"},{t:5.63,x:"Langkahku berat tapi kau tak tahu"},{t:11.67,x:"Aku tersenyum di depanmu"},{t:18.32,x:"Padahal hatiku nyaris membeku"},{t:24.66,x:"Kau berjalan tanpa menoleh"},{t:29.72,x:"Aku tenggelam dalam bayangmu"},{t:37.31,x:"Dan dunia tetap berputar"},{t:41.61,x:"Meski aku tak lagi utuh"},{t:48.17,x:"Bahkan tangisku terlalu lirih"},{t:54.22,x:"Untuk mengguncang perhatianmu"},{t:60.15,x:"Aku runtuh tanpa suara"},{t:64.08,x:"Di titik terendah kau tak melihatku"},{t:72.28,x:"Cinta ini jadi rahasia"},{t:80.63,x:"Yang hanya aku dan malam tahu"},{t:88.22,x:"Kau tertawa aku ikut tertawa"},{t:91.68,x:"Padahal jiwaku sedang patah"},{t:94.73,x:"Kau bahagia aku pura-pura"},{t:97.33,x:"Menjadi kuat meski tak kuasa"},{t:101.03,x:"Andai kau tahu betapa aku"},{t:103.73,x:"Menunggu satu tatapan darimu"},{t:106.72,x:"Tapi aku hanyalah bayangan"},{t:109.82,x:"Yang kau lewati tanpa perasaan"},{t:116.87,x:"Bahkan tangisku terlalu lirih"},{t:123.16,x:"Untuk mengguncang perhatianmu"},{t:129.01,x:"Aku runtuh tanpa suara"},{t:132.53,x:"Di titik terendah kau tak melihatku"},{t:141.32,x:"Cinta ini jadi rahasia"},{t:148.78,x:"Yang hanya aku dan malam tahu"},{t:155.11,x:"Dan mungkin, selamanya begitu"},{t:160.65,x:"Aku runtuh"},{t:166.89,x:"Tanpa suara"}],
+"Kilau Tanpa Sorotan":[{t:17.33,x:"Langkah kecil di jalan sepi"},{t:24.24,x:"Tak ada sorot tak ada tepuk tangan"},{t:32.04,x:"Namun hatiku tetap bernyanyi"},{t:38.02,x:"Kilauku tak butuh panggung besar"},{t:45.83,x:"Kilau tanpa sorotan"},{t:53.64,x:"Tetap hidup dalam diam"},{t:61.09,x:"Resonansi yang perlahan"},{t:67.14,x:"Mengalun di ruang tenang"},{t:76.23,x:"Bayangan jatuh cahaya redup"},{t:83.84,x:"Aku masih berdiri tak perlu bukti"},{t:91.08,x:"Dalam senyap aku menemukan"},{t:97.06,x:"Arti hadir tanpa keramaian"},{t:104.87,x:"Kilau tanpa sorotan"},{t:112.93,x:"Tetap hidup dalam diam"},{t:120.17,x:"Resonansi yang perlahan"},{t:126.20,x:"Mengalun di ruang tenang"},{t:161.20,x:"Tak semua harus terlihat"},{t:168.64,x:"Tak semua harus terdengar"},{t:175.96,x:"Ada indah yang sederhana"},{t:181.54,x:"Ada damai tanpa suara"},{t:189.19,x:"Kilauku tetap ada"},{t:198.21,x:"Meski tanpa sorotan"},{t:205.07,x:"Resonansi dalam diam"},{t:211.29,x:"Mengikat jiwa perlahan"}],
+"Gelombang Terakhir":[{t:13.59,x:"Di tepi senja aku menunggu"},{t:19.11,x:"Gelombang terakhir datang membisu"},{t:24.89,x:"Angin berbisik waktu pun layu"},{t:30.49,x:"Nada sederhana hati pun luluh"},{t:34.61,x:"Gelombang terakhir bawa aku pergi"},{t:40.52,x:"Temani langkah temani mimpi"},{t:46.30,x:"Kita hanyut tanpa janji lagi"},{t:51.10,x:"Gelombang terakhir aku percaya diri"},{t:62.43,x:"Langkah kecil di pasir yang hilang"},{t:68.23,x:"Jejakmu samar tapi tetap tenang"},{t:73.96,x:"Cahaya redup tak perlu terang"},{t:79.72,x:"Ritme sederhana rasa pun datang"},{t:83.86,x:"Gelombang terakhir bawa aku pergi"},{t:89.75,x:"Temani langkah temani mimpi"},{t:95.61,x:"Kita hanyut tanpa janji lagi"},{t:101.18,x:"Gelombang terakhir aku percaya diri"},{t:108.99,x:"Tak ada kata hanya rasa"},{t:114.56,x:"Mengalir pelan seperti nada"},{t:120.25,x:"Gelombang terakhir aku percaya"},{t:124.85,x:"Diam pun bisa jadi suara"},{t:132.35,x:"Gelombang terakhir"}]
+};
 
-  /* ====== DOM ====== */
-  const audio       = document.getElementById('audio-engine');
-  const playBtn     = document.getElementById('play-trigger');
-  const playBtnM    = document.getElementById('play-trigger-m');
-  const playSvg     = document.getElementById('play-icon-svg');
-  const playSvgM    = document.getElementById('play-icon-svg-m');
-  const statusEl    = document.getElementById('playback-status');
-  const lyricsDiv   = document.getElementById('lyrics-display');
-  const progFill    = document.getElementById('progress-fill');
-  const timeNow     = document.getElementById('time-now');
-  const timeEnd     = document.getElementById('time-end');
-  const titleEl     = document.getElementById('display-title');
-  const albumEl     = document.getElementById('display-album');
-  const nowDot      = document.getElementById('now-dot');
-  const shuffleBtn  = document.getElementById('shuffle-btn');
-  const repeatBtn   = document.getElementById('repeat-btn');
-  const prevBtn     = document.getElementById('prev-btn');
-  const nextBtn     = document.getElementById('next-btn');
-  const prevBtnM    = document.getElementById('prev-btn-m');
-  const nextBtnM    = document.getElementById('next-btn-m');
-  const volSlider   = document.getElementById('vol-slider');
-  const volDisplay  = document.getElementById('vol-display');
-  const progRoot    = document.getElementById('prog-root');
-  const dlBtn       = document.getElementById('download-btn');
-  const dlBtnM      = document.getElementById('download-btn-m');
-  const shareBtn    = document.getElementById('share-icon-btn');
-  const modalOv     = document.getElementById('downloadModalOverlay');
-  const modalX      = document.getElementById('modalCloseBtn');
-  const modalDb     = document.getElementById('modalDropboxOption');
-  const modalGd     = document.getElementById('modalGdriveOption');
-  const visEl       = document.getElementById('visualizer-bars');
-
-  // Sleep timer
-  const sleepSelect     = document.getElementById('sleep-select');
-  const sleepStartBtn   = document.getElementById('sleep-start-btn');
-  const sleepCancelBtn  = document.getElementById('sleep-cancel-btn');
-  const sleepBadge      = document.getElementById('sleepBadge');
-  const sleepCountdown  = document.getElementById('sleepCountdown');
-
-  let currentIdx = 0, isShuffle = false, isRepeat = false;
-  let isInteracted = false, loginHidden = false;
-  let currentLrc = [];
-
-  // Audio fade state
-  let fadeRaf = null;
-  let fadeTarget = 0;
-  let fadeDuration = 600; // ms
-  let fadeStart = null;
-  let fadeFrom = 0;
-  let isFading = false;
-  let pendingPause = false;
-
-  // Sleep timer state
-  let sleepTimer = null;
-  let sleepEndTime = null;
-  let sleepTickInterval = null;
-
-  /* ====== VOLUME ====== */
-  (function initVol() {
-    const saved = localStorage.getItem('mhj_vol');
-    const vol = saved !== null ? parseFloat(saved) : 0.7;
-    audio.volume = vol;
-    volSlider.value = vol;
-    volDisplay.textContent = Math.round(vol * 100) + '%';
-  })();
-
-  volSlider.addEventListener('input', e => {
-    const v = parseFloat(e.target.value);
-    // only update if not actively fading (we respect fade direction)
-    if (!isFading) audio.volume = v;
-    fadeTarget = v; // always update target
-    volDisplay.textContent = Math.round(v * 100) + '%';
-    localStorage.setItem('mhj_vol', v);
-  });
-
-  /* ====== HELPERS ====== */
-  function fmt(s) {
-    if (!isFinite(s) || isNaN(s)) return '0:00';
-    const m = Math.floor(s / 60), sec = Math.floor(s % 60);
-    return `${m}:${sec.toString().padStart(2, '0')}`;
+/* ═══ ART ═══ */
+const palettes=[
+  ['#060820','#0c1640','#2a5abf','#5a8fff','#b0d0ff'],
+  ['#060f0a','#0a2010','#1a6a40','#40c080','#90e8b0'],
+  ['#110820','#220a40','#7a20a0','#c060e8','#e8b0ff'],
+  ['#1a0608','#3a0a10','#a01830','#f04060','#ffa8b0'],
+  ['#060e18','#0a1c30','#155888','#30a0d8','#88c8f0'],
+  ['#161400','#302800','#806000','#d8a020','#f8cc60'],
+];
+function drawArt(cv,idx,sz){
+  cv.width=sz;cv.height=sz;
+  const c=cv.getContext('2d');
+  let s=idx*7+13;
+  const r=()=>{s=(s*9301+49297)%233280;return s/233280};
+  const p=palettes[idx%palettes.length];
+  const g=c.createLinearGradient(0,0,sz,sz);
+  g.addColorStop(0,p[0]);g.addColorStop(1,p[1]);
+  c.fillStyle=g;c.fillRect(0,0,sz,sz);
+  for(let i=0;i<8;i++){
+    const gx=r()*sz,gy=r()*sz,gr=sz*(.12+r()*.6);
+    const rg=c.createRadialGradient(gx,gy,0,gx,gy,gr);
+    rg.addColorStop(0,p[2+Math.floor(r()*3)]+'55');
+    rg.addColorStop(1,'transparent');
+    c.fillStyle=rg;c.fillRect(0,0,sz,sz);
   }
+  c.globalAlpha=.1;
+  for(let w=0;w<5;w++){
+    c.beginPath();c.strokeStyle=p[3];c.lineWidth=1+r()*2;
+    const yb=r()*sz;c.moveTo(0,yb);
+    for(let x=0;x<=sz;x+=4)
+      c.lineTo(x,yb+Math.sin((x/sz)*Math.PI*(2+r()*4)+r()*Math.PI)*(12+r()*sz*.15));
+    c.stroke();
+  }
+  c.globalAlpha=1;
+  const cg=c.createRadialGradient(sz/2,sz/2,0,sz/2,sz/2,sz*.4);
+  cg.addColorStop(0,p[4]+'20');cg.addColorStop(1,'transparent');
+  c.fillStyle=cg;c.fillRect(0,0,sz,sz);
+  c.globalAlpha=.5;
+  for(let d=0;d<50;d++){
+    c.beginPath();c.arc(r()*sz,r()*sz,.5+r()*2,0,Math.PI*2);
+    c.fillStyle=p[3+Math.floor(r()*2)];c.fill();
+  }
+  c.globalAlpha=1;
+}
 
-  const PLAY_PATH  = 'M5 3 19 12 5 21 5 3';
-  const PAUSE_PATH = 'M6 4h4v16H6zM14 4h4v16h-4z';
+/* ═══ STATE ═══ */
+const aud=document.getElementById('aud');
+let idx=0,shuffle=false,repeat=false,interacted=false;
+let curLrc=[],lastLi=-1;
+let fadeRaf=null,fading=false;
+let sleepEnd=null,sleepTick=null;
 
-  function setPlayIcon(playing) {
-    // Animate path morph via setAttribute
-    [playSvg, playSvgM].forEach(svg => {
-      if (!svg) return;
-      svg.innerHTML = playing
-        ? `<rect x="6" y="4" width="4" height="16" rx="1" fill="currentColor"/><rect x="14" y="4" width="4" height="16" rx="1" fill="currentColor"/>`
-        : `<polygon points="5 3 19 12 5 21 5 3" fill="currentColor"/>`;
+/* ═══ HELPERS ═══ */
+const $=id=>document.getElementById(id);
+const fmt=s=>isFinite(s)?`${Math.floor(s/60)}:${(Math.floor(s%60)+'').padStart(2,'0')}`:'0:00';
+
+const ambColors=[
+  'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(30,60,200,.22) 0%, transparent 70%)',
+  'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(20,140,70,.18) 0%, transparent 70%)',
+  'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(120,30,180,.2) 0%, transparent 70%)',
+  'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(180,30,50,.18) 0%, transparent 70%)',
+  'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(20,90,180,.22) 0%, transparent 70%)',
+  'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(160,100,10,.18) 0%, transparent 70%)',
+];
+
+function setPlaySvg(svgEl,playing){
+  if(!svgEl)return;
+  svgEl.innerHTML=playing
+    ?'<rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>'
+    :'<polygon points="5 3 19 12 5 21 5 3"/>';
+}
+function syncPlayBtns(playing){
+  ['playSvg','lyrPlaySvg','plPlaySvg'].forEach(id=>setPlaySvg($(id),playing));
+  $('artOuter').classList.toggle('playing',playing);
+  $('lyrViz').classList.toggle('on',playing);
+  document.querySelectorAll('.pl-track.on').forEach(e=>e.classList.toggle('paused',!playing));
+}
+
+function cancelFade(){if(fadeRaf){cancelAnimationFrame(fadeRaf);fadeRaf=null}fading=false}
+function fadeTo(to,dur,cb){
+  cancelFade();
+  const from=aud.volume;
+  if(Math.abs(to-from)<.004){aud.volume=to;if(cb)cb();return}
+  fading=true;let t0=null;
+  (function step(ts){
+    if(!t0)t0=ts;
+    const p=Math.min((ts-t0)/dur,1);
+    const e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
+    aud.volume=from+(to-from)*e;
+    if(p<1){fadeRaf=requestAnimationFrame(step)}
+    else{aud.volume=to;fading=false;fadeRaf=null;if(cb)cb()}
+  })(performance.now());
+}
+function getVol(){return parseFloat($('volSl').value)}
+function doPlay(){aud.volume=0;aud.play().then(()=>{syncPlayBtns(true);fadeTo(getVol(),480)}).catch(()=>{})}
+function doPause(){fadeTo(0,360,()=>{aud.pause();aud.volume=getVol();syncPlayBtns(false)});syncPlayBtns(false)}
+function toggle(){interacted=true;aud.paused?doPlay():doPause()}
+
+/* ═══ LYRICS ═══ */
+function loadLyrics(name){
+  const lrc=lyrics[name];curLrc=[];lastLi=-1;
+  const body=$('lyrBody');body.innerHTML='';
+  $('lyrTitle').textContent=name;
+  $('lyrAlbum').textContent=songs[idx]?.group||'Muhaajir';
+  if(!lrc||!lrc.length){
+    body.innerHTML='<div class="lyr-line empty"><svg class="lyr-empty-icon" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>Tidak ada lirik</div>';
+    return;
+  }
+  curLrc=lrc;
+  lrc.forEach(l=>{
+    const s=document.createElement('span');
+    s.className='lyr-line';s.textContent=l.x;
+    body.appendChild(s);
+  });
+  body.scrollTop=0;
+}
+
+function highlightLyric(t){
+  if(!curLrc.length)return;
+  const lines=$('lyrBody').querySelectorAll('.lyr-line:not(.empty)');
+  let ai=-1;
+  for(let i=0;i<curLrc.length;i++){if(curLrc[i].t<=t)ai=i;else break}
+  if(ai===lastLi)return;lastLi=ai;
+  lines.forEach((l,i)=>{
+    l.classList.remove('cur','near');
+    if(i===ai)l.classList.add('cur');
+    else if(i===ai-1||i===ai-2)l.classList.add('near');
+  });
+  if(ai>=0&&lines[ai])lines[ai].scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+/* ═══ ART DRAW ═══ */
+function drawAll(i){
+  const sz=$('artCv').parentElement.clientWidth||300;
+  drawArt($('artCv'),i,sz);
+  drawArt($('lyrMiniCv'),i,84);
+  drawArt($('plMiniCv'),i,84);
+}
+
+/* ═══ LOAD SONG ═══ */
+function load(i,play=true){
+  const s=songs[i];if(!s)return;
+  lastLi=-1;
+  $('npTitle').textContent=s.name;
+  $('npAlbum').textContent=s.group+' · Muhaajir';
+  $('lyrMiniTitle').textContent=s.name;
+  $('plMiniTitle').textContent=s.name;
+  $('lyrTitle').textContent=s.name;
+  $('lyrAlbum').textContent=s.group;
+  loadLyrics(s.name);
+  drawAll(i);
+
+  // ambient
+  $('ambientBg').style.background=ambColors[i%ambColors.length];
+
+  // download data
+  const file=s.name+' - Muhaajir.mp3';
+  $('optGd').dataset.url=s.gdId?`https://drive.google.com/uc?export=download&id=${s.gdId}`:'';
+  $('optGd').dataset.file=file;
+  $('optDb').dataset.url=s.url?s.url.replace('raw=1','dl=1'):'';
+  $('optDb').dataset.file=file;
+  $('modalSub').textContent='"'+s.name+'"';
+
+  aud.removeEventListener('error',onErr);
+  aud.src=s.url;aud.load();
+  let fb=false;
+  function onErr(){
+    if(fb)return;fb=true;
+    if(s.gdId){aud.src=`https://drive.google.com/uc?export=download&id=${s.gdId}`;aud.load();if(play&&interacted)doPlay();}
+  }
+  aud.addEventListener('error',onErr);
+  if(play&&interacted)doPlay();
+
+  document.querySelectorAll('.pl-track').forEach(e=>e.classList.remove('on','paused'));
+  const a=document.querySelector(`.pl-track[data-i="${i}"]`);
+  if(a){a.classList.add('on');a.scrollIntoView({behavior:'smooth',block:'nearest'})}
+
+  if('mediaSession' in navigator)
+    navigator.mediaSession.metadata=new MediaMetadata({
+      title:s.name,artist:'Muhaajir',album:s.group,
+      artwork:[{src:'https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png',sizes:'512x512',type:'image/png'}]
     });
-  }
+}
 
-  function setPlaying(playing) {
-    setPlayIcon(playing);
-    playBtn.classList.toggle('playing', playing);
-    if (playBtnM) playBtnM.classList.toggle('playing', playing);
-    statusEl.textContent = playing ? '▶ Memutar' : '⏸ Dijeda';
-    statusEl.className = 'playback-status' + (playing ? ' playing' : '');
-    nowDot.className = 'now-playing-dot' + (playing ? '' : ' paused');
-    playing ? visEl.classList.add('active') : visEl.classList.remove('active');
-    document.querySelectorAll('.track-item.active').forEach(el => {
-      playing ? el.classList.remove('paused') : el.classList.add('paused');
-    });
-  }
-
-  /* ====== ORGANIC AUDIO FADE (rAF-based, pop-free) ====== */
-  function cancelFade() {
-    if (fadeRaf) { cancelAnimationFrame(fadeRaf); fadeRaf = null; }
-    isFading = false; fadeStart = null; pendingPause = false;
-  }
-
-  function fadeTo(targetVol, duration, onComplete) {
-    cancelFade();
-    const fromVol = audio.volume;
-    if (Math.abs(targetVol - fromVol) < 0.001) { audio.volume = targetVol; if(onComplete) onComplete(); return; }
-    isFading = true;
-    let startTime = null;
-    function step(ts) {
-      if (!startTime) startTime = ts;
-      const elapsed = ts - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      // ease in-out cubic
-      const t = progress < 0.5 ? 4*progress*progress*progress : 1 - Math.pow(-2*progress+2,3)/2;
-      audio.volume = fromVol + (targetVol - fromVol) * t;
-      if (progress < 1) {
-        fadeRaf = requestAnimationFrame(step);
-      } else {
-        audio.volume = targetVol;
-        isFading = false;
-        fadeRaf = null;
-        if (onComplete) onComplete();
-      }
+/* ═══ PLAYLIST BUILD ═══ */
+function buildPlaylist(){
+  const w=$('plScroll');let lastG='';
+  songs.forEach((s,i)=>{
+    if(s.group!==lastG){
+      lastG=s.group;
+      const g=document.createElement('div');g.className='pl-group';g.textContent=s.group;w.appendChild(g);
     }
-    fadeRaf = requestAnimationFrame(step);
-  }
-
-  function smoothPlay() {
-    const target = parseFloat(volSlider.value);
-    audio.volume = 0;
-    audio.play().then(() => {
-      setPlaying(true);
-      fadeTo(target, 550);
-    }).catch(() => {});
-  }
-
-  function smoothPause() {
-    fadeTo(0, 400, () => {
-      audio.pause();
-      audio.volume = parseFloat(volSlider.value);
-      setPlaying(false);
-    });
-    // Immediately update UI state so it feels responsive
-    setPlaying(false);
-    setPlayIcon(false);
-  }
-
-  /* ====== LYRICS ====== */
-  function loadLyrics(songName) {
-    const lrc = lyricsMap[songName];
-    currentLrc = [];
-    if (Array.isArray(lrc) && lrc.length) {
-      currentLrc = lrc;
-      lyricsDiv.innerHTML = lrc.map(l =>
-        `<span class="lyric-line" data-t="${l.time}">${l.text}</span>`
-      ).join('');
-    } else {
-      lyricsDiv.innerHTML = `<span class="lyric-line active-lyric">🎵 ${songName}</span>`;
-    }
-    lyricsDiv.scrollTop = 0;
-  }
-
-  let lastActiveIdx = -1;
-  function highlightLyric(t) {
-    if (!currentLrc.length) return;
-    const lines = lyricsDiv.querySelectorAll('.lyric-line');
-    let active = -1;
-    for (let i = 0; i < currentLrc.length; i++) {
-      if (currentLrc[i].time <= t) active = i; else break;
-    }
-    if (active === lastActiveIdx) return;
-    lastActiveIdx = active;
-    lines.forEach((l, i) => {
-      const isActive = i === active;
-      l.classList.toggle('active-lyric', isActive);
-      if (isActive) {
-        l.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-    });
-  }
-
-  /* ====== DOWNLOAD ====== */
-  async function safeDownload(url, filename, el) {
-    if (!url) { alert('URL tidak tersedia.'); return; }
-    if (el) el.classList.add('downloading');
-    try {
-      const res = await fetch(url, { mode: 'cors' });
-      if (!res.ok) throw new Error();
-      const blob = await res.blob();
-      const a = Object.assign(document.createElement('a'), {
-        href: URL.createObjectURL(blob),
-        download: filename.endsWith('.mp3') ? filename : filename + '.mp3'
-      });
-      document.body.appendChild(a); a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(a.href);
-    } catch {
-      window.open(url, '_blank');
-    } finally {
-      if (el) el.classList.remove('downloading');
-    }
-  }
-
-  function setDownloadData(song) {
-    // Bersihkan nama file dari karakter aneh
-    const cleanName = song.name
-      .replace(/[^\w\s\-]/g, '')  // Hanya huruf, angka, spasi, dan strip
-      .trim();
-    const file = cleanName + ' - Muhaajir.mp3';
-    
-    // SERVER 1: Google Drive
-    modalGd.dataset.url = song.gdId ? `https://drive.google.com/uc?export=download&id=${song.gdId}` : '';
-    modalGd.dataset.file = file;
-    
-    // SERVER 2: Dropbox
-    modalDb.dataset.url = song.url ? song.url.replace('raw=1', 'dl=1') : '';
-    modalDb.dataset.file = file;
-  }
-
-  // Urutan server: GDrive (Server 1), Dropbox (Server 2)
-  modalGd.addEventListener('click', () => safeDownload(modalGd.dataset.url, modalGd.dataset.file, modalGd));
-  modalDb.addEventListener('click', () => safeDownload(modalDb.dataset.url, modalDb.dataset.file, modalDb));
-
-  function openModal() { modalOv.classList.add('show'); }
-  const closeModal = () => modalOv.classList.remove('show');
-  dlBtn.addEventListener('click', e => { e.stopPropagation(); openModal(); });
-  if (dlBtnM) dlBtnM.addEventListener('click', e => { e.stopPropagation(); openModal(); });
-  modalX.addEventListener('click', closeModal);
-  modalOv.addEventListener('click', e => { if (e.target === modalOv) closeModal(); });
-
-  /* ====== LOAD SONG ====== */
-  function loadSong(idx, play = true) {
-    const song = rawSongs[idx];
-    if (!song) return;
-    lastActiveIdx = -1;
-    titleEl.textContent = song.name;
-    albumEl.textContent = song.group;
-    loadLyrics(song.name);
-    setDownloadData(song);
-
-    audio.removeEventListener('error', onAudioErr);
-    audio.src = song.url;
-    audio.load();
-
-    let fallback = false;
-    function onAudioErr() {
-      if (fallback) { statusEl.textContent = '❌ Gagal memuat'; return; }
-      fallback = true;
-      if (song.gdId) {
-        audio.src = `https://drive.google.com/uc?export=download&id=${song.gdId}`;
-        audio.load();
-        if (play && isInteracted) smoothPlay();
-      } else { statusEl.textContent = '❌ Gagal memuat'; }
-    }
-    audio.addEventListener('error', onAudioErr);
-
-    if (play && isInteracted) smoothPlay();
-
-    // Playlist highlight
-    document.querySelectorAll('.track-item').forEach(el => el.classList.remove('active', 'paused'));
-    const activeEl = document.querySelector(`.track-item[data-i="${idx}"]`);
-    if (activeEl) { activeEl.classList.add('active'); activeEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
-
-    if ('mediaSession' in navigator) {
-      navigator.mediaSession.metadata = new MediaMetadata({
-        title: song.name, artist: 'Muhaajir', album: song.group,
-        artwork: [{ src: 'https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png', sizes: '512x512', type: 'image/png' }]
-      });
-    }
-  }
-
-  /* ====== PLAYLIST ====== */
-  function renderPlaylist() {
-    const wrap = document.getElementById('playlist-inject');
-    if (!wrap) return;
-    let lastGroup = '';
-    rawSongs.forEach((s, i) => {
-      if (s.group !== lastGroup) {
-        lastGroup = s.group;
-        const lbl = document.createElement('div');
-        lbl.className = 'group-label'; lbl.textContent = s.group;
-        wrap.appendChild(lbl);
-      }
-      const item = document.createElement('div');
-      item.className = 'track-item'; item.dataset.i = i;
-      item.innerHTML = `
-        <span class="t-num">${i + 1}</span>
-        <span class="t-name">${s.name}</span>
-        <div class="t-wave"><span></span><span></span><span></span></div>
-      `;
-      item.addEventListener('click', () => {
-        isInteracted = true;
-        currentIdx = i;
-        loadSong(currentIdx, true);
-      });
-      wrap.appendChild(item);
-    });
-    document.getElementById('track-count').textContent = rawSongs.length + ' Lagu';
-  }
-
-  /* ====== CONTROLS ====== */
-  function handlePlayPause() {
-    isInteracted = true;
-    if (audio.paused) {
-      cancelFade();
-      smoothPlay();
-    } else {
-      smoothPause();
-    }
-  }
-
-  playBtn.addEventListener('click', handlePlayPause);
-  if (playBtnM) playBtnM.addEventListener('click', handlePlayPause);
-
-  audio.addEventListener('ended', () => {
-    if (isRepeat) { audio.currentTime = 0; smoothPlay(); }
-    else nextBtn.click();
+    const r=document.createElement('div');r.className='pl-track';r.dataset.i=i;
+    r.innerHTML=`<span class="pl-num">${i+1}</span><span class="pl-tname">${s.name}</span><div class="pl-wave"><span></span><span></span><span></span></div>`;
+    r.addEventListener('click',()=>{interacted=true;idx=i;load(i,true);showView('vPlayer')});
+    w.appendChild(r);
   });
+  $('plCount').textContent=songs.length+' Lagu';
+}
 
-  audio.addEventListener('timeupdate', () => {
-    if (audio.duration) {
-      progFill.style.width = (audio.currentTime / audio.duration * 100) + '%';
-      timeNow.textContent = fmt(audio.currentTime);
-      timeEnd.textContent = fmt(audio.duration);
+/* ═══ PROGRESS ═══ */
+aud.addEventListener('timeupdate',()=>{
+  if(!aud.duration)return;
+  const p=(aud.currentTime/aud.duration*100)+'%';
+  $('pFill').style.width=p;
+  $('lyrPFill').style.width=p;
+  $('plPFill').style.width=p;
+  const tn=fmt(aud.currentTime),te=fmt(aud.duration);
+  $('tNow').textContent=tn;$('tEnd').textContent=te;
+  highlightLyric(aud.currentTime);
+});
+
+function seekAt(ratio){
+  if(!aud.duration)return;
+  interacted=true;
+  const was=!aud.paused;
+  cancelFade();aud.volume=0;
+  aud.currentTime=ratio*aud.duration;
+  if(was)setTimeout(()=>fadeTo(getVol(),250),40);
+  else aud.volume=getVol();
+}
+
+// Progress touch/click
+function bindProg(el){
+  el.addEventListener('click',e=>{
+    const r=el.getBoundingClientRect();
+    seekAt((e.clientX-r.left)/r.width);
+  });
+  let dragging=false;
+  el.addEventListener('touchstart',e=>{dragging=true;el.classList.add('dragging')},{passive:true});
+  el.addEventListener('touchmove',e=>{
+    if(!dragging)return;
+    const r=el.getBoundingClientRect();
+    const t=e.touches[0];
+    seekAt(Math.max(0,Math.min(1,(t.clientX-r.left)/r.width)));
+  },{passive:true});
+  el.addEventListener('touchend',()=>{dragging=false;el.classList.remove('dragging')});
+}
+bindProg($('progTrack'));
+bindProg($('lyrProgBar'));
+
+/* ═══ NAVIGATION ═══ */
+function getNext(dir){
+  if(shuffle){let r;do{r=Math.floor(Math.random()*songs.length)}while(r===idx&&songs.length>1);return r}
+  return(idx+dir+songs.length)%songs.length;
+}
+function prev(){interacted=true;idx=getNext(-1);load(idx)}
+function next(){interacted=true;idx=getNext(1);load(idx)}
+aud.addEventListener('ended',()=>{if(repeat){aud.currentTime=0;doPlay()}else next()});
+
+$('btnPlay').addEventListener('click',toggle);
+$('plPlay').addEventListener('click',toggle);
+$('lyrPlay').addEventListener('click',toggle);
+$('btnPrev').addEventListener('click',prev);
+$('btnNext').addEventListener('click',next);
+$('lyrPrev').addEventListener('click',prev);
+$('lyrNext').addEventListener('click',next);
+$('btnShuffle').addEventListener('click',()=>{shuffle=!shuffle;$('btnShuffle').classList.toggle('on',shuffle)});
+$('btnRepeat').addEventListener('click',()=>{repeat=!repeat;$('btnRepeat').classList.toggle('on',repeat)});
+
+if('mediaSession' in navigator){
+  navigator.mediaSession.setActionHandler('play',()=>{interacted=true;doPlay()});
+  navigator.mediaSession.setActionHandler('pause',doPause);
+  navigator.mediaSession.setActionHandler('previoustrack',prev);
+  navigator.mediaSession.setActionHandler('nexttrack',next);
+}
+
+/* ═══ VOLUME ═══ */
+const savedVol=parseFloat(localStorage.getItem('mhj4_vol')||'.7');
+[$('volSl'),$('volSetSl')].forEach(el=>{if(el)el.value=savedVol});
+$('volPct').textContent=Math.round(savedVol*100)+'%';
+$('volSetPct').textContent=Math.round(savedVol*100)+'%';
+$('volSetSub').textContent=Math.round(savedVol*100)+'%';
+aud.volume=savedVol;
+
+[$('volSl'),$('volSetSl')].forEach(el=>{
+  if(!el)return;
+  el.addEventListener('input',e=>{
+    const v=parseFloat(e.target.value);
+    if(!fading)aud.volume=v;
+    [$('volSl'),$('volSetSl')].forEach(x=>{if(x&&x!==el)x.value=v});
+    $('volPct').textContent=Math.round(v*100)+'%';
+    $('volSetPct').textContent=Math.round(v*100)+'%';
+    $('volSetSub').textContent=Math.round(v*100)+'%';
+    localStorage.setItem('mhj4_vol',v);
+  });
+});
+
+/* ═══ SHARE ═══ */
+function doShare(){
+  const s=songs[idx];
+  if(s)window.open(`https://wa.me/?text=${encodeURIComponent('*'+s.name+'* — Muhaajir\n'+location.href)}`, '_blank');
+}
+$('btnShare').addEventListener('click',doShare);
+$('setShare').addEventListener('click',doShare);
+
+/* ═══ DOWNLOAD ═══ */
+async function dl(url,file,el){
+  if(!url){alert('URL tidak tersedia.');return}
+  if(el)el.classList.add('dl-ing');
+  try{
+    const res=await fetch(url,{mode:'cors'});
+    if(!res.ok)throw new Error();
+    const blob=await res.blob();
+    const a=Object.assign(document.createElement('a'),{href:URL.createObjectURL(blob),download:file.endsWith('.mp3')?file:file+'.mp3'});
+    document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(a.href);
+  }catch{window.open(url,'_blank')}
+  finally{if(el)el.classList.remove('dl-ing')}
+}
+function openModal(){$('modalBg').classList.add('on')}
+function closeModal(){$('modalBg').classList.remove('on')}
+$('btnDl').addEventListener('click',e=>{e.stopPropagation();openModal()});
+$('setDl').addEventListener('click',e=>{e.stopPropagation();openModal()});
+$('modalBg').addEventListener('click',e=>{if(e.target===$('modalBg'))closeModal()});
+$('optGd').addEventListener('click',()=>dl($('optGd').dataset.url,$('optGd').dataset.file,$('optGd')));
+$('optDb').addEventListener('click',()=>dl($('optDb').dataset.url,$('optDb').dataset.file,$('optDb')));
+
+// Swipe down modal
+let mTy=0;
+$('modalBg').addEventListener('touchstart',e=>{if(e.target.closest('.modal'))mTy=e.touches[0].clientY},{passive:true});
+$('modalBg').addEventListener('touchend',e=>{
+  if(e.target.closest('.modal')&&e.changedTouches[0].clientY-mTy>60)closeModal();
+});
+
+/* ═══ SLEEP TIMER ═══ */
+function fmtS(ms){const s=Math.ceil(ms/1000);return`${Math.floor(s/60)}:${(s%60+'').padStart(2,'0')}`}
+function startSleep(sec){
+  clearSleep();
+  sleepEnd=Date.now()+sec*1000;
+  $('sleepStop').style.display='inline-block';
+  $('sleepGo').style.display='none';
+  $('sleepCd').classList.add('on');
+  $('btnTimer').classList.add('has-timer');
+  function tick(){
+    const r=sleepEnd-Date.now();
+    if(r<=0){
+      $('sleepCdTxt').textContent='0:00';
+      clearSleep();
+      fadeTo(0,1500,()=>{aud.pause();aud.volume=getVol();syncPlayBtns(false)});
+      return;
     }
-    highlightLyric(audio.currentTime);
+    $('sleepCdTxt').textContent=fmtS(r);
+    $('sleepStatus').textContent=fmtS(r)+' tersisa';
+  }
+  tick();sleepTick=setInterval(tick,500);
+}
+function clearSleep(){
+  if(sleepTick){clearInterval(sleepTick);sleepTick=null}
+  sleepEnd=null;
+  $('sleepStop').style.display='none';
+  $('sleepGo').style.display='inline-block';
+  $('sleepCd').classList.remove('on');
+  $('btnTimer').classList.remove('has-timer');
+  $('sleepSel').value='';
+  $('sleepStatus').textContent='Tidak aktif';
+}
+$('sleepGo').addEventListener('click',()=>{const v=parseInt($('sleepSel').value);if(v)startSleep(v)});
+$('sleepStop').addEventListener('click',clearSleep);
+$('btnTimer').addEventListener('click',()=>showView('vSettings'));
+
+/* ═══ VIEW NAVIGATION ═══ */
+let curView='vPlayer';
+function showView(id){
+  if(id===curView)return;
+  const prev=document.getElementById(curView);
+  const next=document.getElementById(id);
+  if(!prev||!next)return;
+  prev.classList.add('back-hidden');
+  next.classList.remove('hidden','back-hidden');
+  curView=id;
+  // sync nav buttons
+  document.querySelectorAll('.nav-btn').forEach(b=>{
+    b.classList.toggle('on',b.dataset.view===id);
   });
-
-  progRoot.addEventListener('click', e => {
-    if (!audio.duration) return;
-    isInteracted = true;
-    const r = progRoot.getBoundingClientRect();
-    const ratio = (e.clientX - r.left) / r.width;
-    // Pause, seek, resume to avoid pop
-    const wasPlaying = !audio.paused;
-    cancelFade();
-    audio.volume = 0;
-    audio.currentTime = ratio * audio.duration;
-    if (wasPlaying) {
-      setTimeout(() => fadeTo(parseFloat(volSlider.value), 300), 50);
-    } else {
-      audio.volume = parseFloat(volSlider.value);
-    }
+  setTimeout(()=>prev.classList.add('hidden'),400);
+}
+document.querySelectorAll('[data-view]').forEach(b=>{
+  b.addEventListener('click',e=>{
+    e.stopPropagation();
+    const v=b.dataset.view;
+    if(v)showView(v);
   });
+});
 
-  function pickNext(dir) {
-    if (isShuffle) {
-      let r;
-      do { r = Math.floor(Math.random() * rawSongs.length); } while (r === currentIdx && rawSongs.length > 1);
-      return r;
-    }
-    return (currentIdx + dir + rawSongs.length) % rawSongs.length;
-  }
+/* ═══ ROTATING NAME ═══ */
+const names=['Muhaajir','Regina','Suni','Brava','Niva','Hajir'];
+let ni=0;
+setInterval(()=>{
+  const el=$('rotName');if(!el)return;
+  el.style.opacity=0;
+  setTimeout(()=>{ni=(ni+1)%names.length;el.textContent=names[ni];el.style.opacity=1},400);
+},2800);
 
-  function handlePrev() { isInteracted = true; currentIdx = pickNext(-1); loadSong(currentIdx); }
-  function handleNext() { isInteracted = true; currentIdx = pickNext(1); loadSong(currentIdx); }
+/* ═══ LOADER ═══ */
+let loaderDone=false;
+function hideLoader(){if(loaderDone)return;loaderDone=true;$('loader').classList.add('out');setTimeout(()=>{try{$('loader').remove()}catch{}},1000)}
+aud.addEventListener('canplay',hideLoader,{once:true});
+setTimeout(hideLoader,4500);
 
-  prevBtn.addEventListener('click', handlePrev);
-  nextBtn.addEventListener('click', handleNext);
-  if (prevBtnM) prevBtnM.addEventListener('click', handlePrev);
-  if (nextBtnM) nextBtnM.addEventListener('click', handleNext);
-
-  shuffleBtn.addEventListener('click', () => { isShuffle = !isShuffle; shuffleBtn.classList.toggle('active', isShuffle); });
-  repeatBtn.addEventListener('click', () => { isRepeat = !isRepeat; repeatBtn.classList.toggle('active', isRepeat); });
-
-  shareBtn.addEventListener('click', () => {
-    const s = rawSongs[currentIdx];
-    if (s) window.open(`https://wa.me/?text=${encodeURIComponent('*' + s.name + '* — Muhaajir | ' + location.href)}`, '_blank');
-  });
-
-  /* Media session actions */
-  if ('mediaSession' in navigator) {
-    navigator.mediaSession.setActionHandler('previoustrack', handlePrev);
-    navigator.mediaSession.setActionHandler('nexttrack', handleNext);
-    navigator.mediaSession.setActionHandler('play', () => { isInteracted = true; smoothPlay(); });
-    navigator.mediaSession.setActionHandler('pause', smoothPause);
-  }
-
-  /* ====== SLEEP TIMER ====== */
-  function formatSleepTime(ms) {
-    const s = Math.ceil(ms / 1000);
-    const m = Math.floor(s / 60), sec = s % 60;
-    return `${m}:${sec.toString().padStart(2,'0')}`;
-  }
-
-  function startSleepTimer(seconds) {
-    clearSleepTimer();
-    sleepEndTime = Date.now() + seconds * 1000;
-    sleepBadge.classList.add('visible');
-    sleepCancelBtn.style.display = 'inline-block';
-    sleepStartBtn.style.display = 'none';
-
-    function tick() {
-      const remaining = sleepEndTime - Date.now();
-      if (remaining <= 0) {
-        sleepCountdown.textContent = '0:00';
-        clearSleepTimer();
-        // Fade out and stop
-        fadeTo(0, 1500, () => {
-          audio.pause();
-          audio.volume = parseFloat(volSlider.value);
-          setPlaying(false);
-        });
-        return;
-      }
-      sleepCountdown.textContent = formatSleepTime(remaining);
-    }
-    tick();
-    sleepTickInterval = setInterval(tick, 500);
-  }
-
-  function clearSleepTimer() {
-    if (sleepTimer) { clearTimeout(sleepTimer); sleepTimer = null; }
-    if (sleepTickInterval) { clearInterval(sleepTickInterval); sleepTickInterval = null; }
-    sleepEndTime = null;
-    sleepBadge.classList.remove('visible');
-    sleepCancelBtn.style.display = 'none';
-    sleepStartBtn.style.display = 'inline-block';
-    sleepSelect.value = '';
-  }
-
-  sleepStartBtn.addEventListener('click', () => {
-    const val = parseInt(sleepSelect.value);
-    if (!val) return;
-    startSleepTimer(val);
-  });
-
-  sleepCancelBtn.addEventListener('click', clearSleepTimer);
-
-  /* Allow clicking badge to see remaining clearly */
-  sleepBadge.addEventListener('click', () => {
-    if (sleepEndTime) {
-      const remaining = Math.ceil((sleepEndTime - Date.now()) / 1000);
-      alert(`Sleep timer: ${formatSleepTime(remaining * 1000)} tersisa`);
-    }
-  });
-
-  /* ====== FOOTER ROTATOR ====== */
-  const names = ["Muhaajir", "Regina", "Suni", "Brava", "Niva", "Hajir"];
-  let nameIdx = 0;
-  const rotEl = document.getElementById('rotating-name');
-  setInterval(() => {
-    rotEl.style.opacity = 0;
-    setTimeout(() => {
-      nameIdx = (nameIdx + 1) % names.length;
-      rotEl.textContent = names[nameIdx];
-      rotEl.style.opacity = 1;
-    }, 400);
-  }, 2600);
-
-  /* ====== LOGIN ====== */
-  function hideLogin() {
-    if (loginHidden) return;
-    loginHidden = true;
-    const el = document.getElementById('loginScreen');
-    if (el) { el.classList.add('hidden'); setTimeout(() => el.remove(), 1000); }
-  }
-  audio.addEventListener('canplay', hideLogin, { once: true });
-  setTimeout(hideLogin, 5000);
-
-  /* ====== MOBILE FLOATING CONTROLS VISIBILITY ====== */
-  function updateFloatingVis() {
-    const fc = document.getElementById('floating-controls');
-    if (!fc) return;
-    fc.style.display = window.innerWidth <= 700 ? 'flex' : 'none';
-  }
-  window.addEventListener('resize', updateFloatingVis);
-  updateFloatingVis();
-
-  /* ====== INIT ====== */
-  window.addEventListener('load', () => {
-    renderPlaylist();
-    loadSong(0, false);
-    setPlaying(false);
-  });
+/* ═══ INIT ═══ */
+buildPlaylist();
+load(0,false);
+syncPlayBtns(false);
 
 })();
 </script>
