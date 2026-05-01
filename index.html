@@ -14,14 +14,14 @@
 <meta name="author" content="Regina">
 <meta property="og:title" content="Muhaajir Music | Resonance Studio">
 <meta property="og:description" content="Album Fragmen Suara & Resonansi Dalam Diam. Pemutar musik elegan dengan lirik dan timer tidur.">
-<meta property="og:image" content="https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png">
+<meta property="og:image" content="https://i.postimg.cc/JztFxsRH/hajir-logo-putih.webp">
 <meta property="og:type" content="music.playlist">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Muhaajir Music">
 <meta name="twitter:description" content="Dengarkan album original dari Muhaajir.">
-<meta name="twitter:image" content="https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png">
+<meta name="twitter:image" content="https://i.postimg.cc/JztFxsRH/hajir-logo-putih.webp">
 
-<link rel="icon" href="https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png">
+ <link rel="icon" type="image/webp" href="https://i.postimg.cc/JztFxsRH/hajir-logo-putih.webp" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -780,7 +780,7 @@ body{
 
 <!-- LOADER -->
 <div id="loader">
-  <div class="ld-logo"><img src="https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png" alt="Muhaajir Logo"></div>
+  <div class="ld-logo"><img src="https://i.postimg.cc/JztFxsRH/hajir-logo-putih.webp" alt="Muhaajir Logo"></div>
   <div class="ld-ring"></div>
   <p class="ld-txt">Memuat Resonansi...</p>
 </div>
@@ -789,7 +789,7 @@ body{
 <div class="view" id="vPlayer">
   <div class="status-row">
     <div class="sr-pill"><span class="sr-dot"></span> Hi-Res</div>
-    <img src="https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png" class="sr-logo" alt="">
+    <img src="https://i.postimg.cc/JztFxsRH/hajir-logo-putih.webp" class="sr-logo" alt="">
     <button class="sr-menu" id="btnMenu" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 
@@ -916,7 +916,7 @@ body{
   <div class="set-head"><span class="set-head-title">Pengaturan &amp; Info</span></div>
   <div class="set-body">
     <div class="about-card">
-      <div class="about-logo"><img src="https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png" alt=""></div>
+      <div class="about-logo"><img src="https://i.postimg.cc/JztFxsRH/hajir-logo-putih.webp" alt=""></div>
       <div class="about-name">Muhaajir Music</div>
       <div class="about-sub">Studio Resonansi · 2025–2026</div>
       <div class="about-rotname" id="rotName">Dibuat oleh <span>Regina</span></div>
@@ -1052,7 +1052,7 @@ function load(i,play=true){
   if(play&&interacted)doPlay();
   document.querySelectorAll('.pl-track').forEach(e=>e.classList.remove('on','paused'));
   const a=document.querySelector(`.pl-track[data-i="${i}"]`);if(a)a.classList.add('on');
-  if('mediaSession' in navigator) navigator.mediaSession.metadata=new MediaMetadata({title:s.name,artist:'Muhaajir',album:s.group,artwork:[{src:s.cover||'https://i.postimg.cc/Kvg50f5n/IMG-20250812-164118-putih.png',sizes:'512x512'}]});
+  if('mediaSession' in navigator) navigator.mediaSession.metadata=new MediaMetadata({title:s.name,artist:'Muhaajir',album:s.group,artwork:[{src:s.cover||'https://i.postimg.cc/JztFxsRH/hajir-logo-putih.webp',sizes:'512x512'}]});
 }
 
 function loadLyrics(name){
